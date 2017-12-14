@@ -6,17 +6,23 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 11:44:49 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:46:54 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "format_parsing.h"
 
-const char *seek_flag(const char *format)
+int32_t	seek_flag(const char *string, uint32_t index)
 {
-	while (ft_strchr("-+ #0", *format) != NULL)
-		format++;
-	return format;
+	char	*flag;
+	char	*found;
+
+	flag = "-+ #0";
+	if (string[index] == '0' && is_digit(string[index - 1]))
+		return (FAILURE);
+	if ((found = ft_strchr(flag, string[index])) != NULL)
+		return (found - flag);
+	return (FAILURE);
 }
 
 const char *seek_width(const char *format, int *int_queue)

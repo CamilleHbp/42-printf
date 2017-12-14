@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 13:58:23 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:26:16 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,16 @@
 */
 
 typedef enum {
-	none,
-	minus,
+	minus = 0,
 	plus,
 	space,
 	pound,
 	zero,
-	unknow
+	none
 } e_flag;
 
 typedef enum {
-	none,
-	hh,
+	hh = 0,
 	h,
 	l,
 	ll,
@@ -126,7 +124,6 @@ typedef enum {
 } e_length;
 
 typedef enum {
-	none,
 	integer,
 	floating_point,
 	char_ptr,
@@ -135,11 +132,17 @@ typedef enum {
 	unknown,
 } e_specifier;
 
-typedef struct
+typedef struct s_flag
 {
 	e_flag	flag;
-	t_flag	next_flag;
+	t_flag	*next_flag;
 } t_flag;
+
+typedef struct	s_length
+{
+	e_length	length;
+	t_length	*next_length;
+}				t_lenght;
 
 static typedef struct
 {
@@ -147,7 +150,7 @@ static typedef struct
 	t_flag		*flag;
 	uint32_t	width;
 	uint32_t	preci;
-	e_length	length;
+	t_length	*length;
 	e_specifier spec;
 } t_format;
 
