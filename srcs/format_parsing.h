@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 14:26:16 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/15 18:56:46 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 **		positive numbers. By default, only negative numbers have a - sign.
 ** (space)	If no sign is going to be written, a blank space is inserted before
 **		the value.
-** #		o,x,X:
+** #		oxX:
 **		value is preceeded with 0, 0x or 0X for values different than zero.
-**			a,A,e,E,f,F,g,G:
+**			aAeEfFgG:
 **		it forces the output to contain a decimal point even if no digits follow.
 **		By default, if no digits follow, no decimal point is written.
 ** 0	Left-pads the number with zeroes (0) instead when padding is specified
@@ -41,15 +41,13 @@
 */
 
 /* PRECISION:
-** .number	d,D,i,o,O,u,U,x,X:
+** .number	dDioOuUxX:
 **		precision specifies the minimum number of digits to be written.
 **		If the value is shorter, the result is padded with leading zeros.
 **		The value is not truncated even if the result is longer.
 **		A precision of 0 means that no character is written for the value 0.
-**			a,A,e,E,f,F:
+**			aAeEfFgG:
 **		number of digits to be printed after the decimal point (default is 6).
-**			g,G:
-**		This is the maximum number of significant digits to be printed.
 **			s:
 **		this is the maximum number of characters to be printed.
 **		If the period is specified without an explicit value for precision,
@@ -126,11 +124,11 @@ typedef enum {
 typedef enum {
 	integer,
 	floating_point,
-	char_ptr,
+	string,
 	void_ptr,
-	intpointer,
-	unknown,
-} e_specifier;
+	int_ptr,
+	unknown
+} e_sp_type;
 
 typedef struct s_flag
 {
@@ -138,20 +136,15 @@ typedef struct s_flag
 	t_flag	*next_flag;
 } t_flag;
 
-typedef struct	s_length
-{
-	e_length	length;
-	t_length	*next_length;
-}				t_lenght;
-
-static typedef struct
+typedef struct
 {
 	void		*argument;
 	t_flag		*flag;
 	uint32_t	width;
-	uint32_t	preci;
-	t_length	*length;
-	e_specifier spec;
+	uint32_t	precision;
+	e_length	length;
+	e_sp_type	type;
+	char		specifier;
 } t_format;
 
 

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 14:46:54 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/15 19:04:49 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,73 +78,52 @@ const char *seek_mod(const char *format, int *mod)
 	return format;
 }
 
-const char *seek_specifier(const char *format, int mod, e_specifier *specifier)
+e_sp_type	get_type(const char specifier)
 {
-	if (ft_strchr("dDioOuUxX", *format))
-	{
-		*specifier = integer;
-		format++;
-	}
-	else if (ft_strchr("fFeEgGaA", *format))
-	{
-		if (mod == 'l')
-			mod = 0;
-		*type = type_float;
-		format++;
-	}
-	else if (ft_strchr("c", *format))
-	{
-		*type = type_int;
-		format++;
-	}
-	else if (ft_strchr("s", *format))
-	{
-		*type = type_charpointer;
-		format++;
-	}
-	else if (strchr("p", *format))
-	{
-		*type = type_voidpointer;
-		format++;
-	}
-	else if (strchr("n", *format))
-	{
-		*type = type_intpointer;
-		format++;
-	}
+	if (ft_strchr("dDioOuUxX", specifier))
+		return (integer);
+	else if (ft_strchr("fFeEgGaA", specifier))
+		return (floating_point);
+	else if (ft_strchr("cCsS", specifier))
+		return (string);
+	else if (strchr("p", specifier))
+		return (void_ptr);
+	else if (strchr("n", specifier))
+		return (int_ptr);
 	else
-	{
-		*type = type_unknown;
-		exit(1);
-	}
-	*type |= mod << CHAR_BIT; // Bring in modifier
-	return format;
+		return (unknown);
 }
 
-v
+/*
+** Either returns NULL if the specifier is found
+** or the pointer to which the string should continue to be parsed if no
+** specifier is found
+*/
 
-	// 0 Compatible
-	// 1 Not Compatible
-	// 2 Not Comparable
-	int
-	format_cmp(const char *f1, const char *f2)
+char	*get_specifier(const char *string, t_format *format)
 {
-	format_T state1;
-	format_init(&state1, f1);
-	format_T state2;
-	format_init(&state2, f2);
-	while (format_get(&state1) == format_get(&state2))
+	char		*traverse;
+	char		*specifier;
+
+	specifier = "dDiuUoOxXfFeEgGaAcCsSpn%";
+	traverse = string;
+	while (42)
 	{
-		if (format_get(&state1) == type_none)
-			return 0;
-		if (format_get(&state1) == type_unknown)
-			return 2;
-		format_next(&state1);
-		format_next(&state2);
+		if (*traverse == '\0' || *traverse == ' ')
+		{
+			ft_putnstr(string, (traverse - string));
+			break ;
+		}
+		if (ft_strchr(specifier, *traverse) != NULL)
+		{
+			if (ft_strchr("DUO", *traverse) != NULL)
+			{
+				format->length = l;
+				*traverse += 32;
+			}
+			format->specifier = *traverse;
+			format->type = get_type(*traverse);
+			break ;
+		}
 	}
-	if (format_get(&state1) == type_unknown)
-		return 2;
-	if (format_get(&state2) == type_unknown)
-		return 2;
-	return 1;
 }
