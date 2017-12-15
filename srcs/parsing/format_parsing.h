@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/15 18:56:46 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/15 23:29:49 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,7 @@
 
 #include "ft_printf.h"
 
-/*
-** FLAGS:
-** -	Left-justify within the given field width; Right justification is the
-**		default (see width sub-specifier).
-** +	Forces to preceed the result with a plus or minus sign (+ or -) even for
-**		positive numbers. By default, only negative numbers have a - sign.
-** (space)	If no sign is going to be written, a blank space is inserted before
-**		the value.
-** #		oxX:
-**		value is preceeded with 0, 0x or 0X for values different than zero.
-**			aAeEfFgG:
-**		it forces the output to contain a decimal point even if no digits follow.
-**		By default, if no digits follow, no decimal point is written.
-** 0	Left-pads the number with zeroes (0) instead when padding is specified
-*/
+
 
 /* WIDTH:
 ** (nb)	Minimum number of characters to be printed. If the value to be
@@ -107,45 +93,50 @@ typedef enum {
 	pound,
 	zero,
 	none
-} e_flag;
+}				e_flag;
 
 typedef enum {
-	hh = 0,
-	h,
+	h = 0,
 	l,
-	ll,
 	j,
 	z,
 	t,
 	L,
+	hh,
+	ll,
 	unknown
-} e_length;
+}				e_length;
 
 typedef enum {
-	integer,
+	integer = 0,
 	floating_point,
 	string,
 	void_ptr,
 	int_ptr,
 	unknown
-} e_sp_type;
+}				e_sp_type;
 
-typedef struct s_flag
+typedef struct	s_flag
 {
 	e_flag	flag;
 	t_flag	*next_flag;
-} t_flag;
+}				t_flag;
 
-typedef struct
+typedef struct	s_format
 {
-	void		*argument;
 	t_flag		*flag;
+	t_bool		width_flag;
 	uint32_t	width;
 	uint32_t	precision;
 	e_length	length;
 	e_sp_type	type;
 	char		specifier;
-} t_format;
+}				t_format;
 
+char			*get_specifier(const char *string, t_format *format);
+e_sp_type		get_type(const char specifier);
+int32_t			seek_flag(const char *string, t_format *format);
+t_bool			seek_length(const char **string, t_format *format);
+t_bool			seek_width(const char **string, t_format *format);
 
 #endif

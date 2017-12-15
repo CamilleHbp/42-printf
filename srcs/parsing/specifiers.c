@@ -1,82 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_parsing.c                                   :+:      :+:    :+:   */
+/*   specifiers.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/15 19:04:49 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/15 23:29:49 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "format_parsing.h"
-
-int32_t	seek_flag(const char *string, uint32_t index)
-{
-	char	*flag;
-	char	*found;
-
-	flag = "-+ #0";
-	if (string[index] == '0' && is_digit(string[index - 1]))
-		return (FAILURE);
-	if ((found = ft_strchr(flag, string[index])) != NULL)
-		return (found - flag);
-	return (FAILURE);
-}
-
-const char *seek_width(const char *format, int *int_queue)
-{
-	*int_queue = 0;
-	if (*format == '*')
-	{
-		format++;
-		(*int_queue)++;
-	}
-	else
-	{
-		while (ft_isdigit((unsigned char)*format))
-			format++;
-	}
-	if (*format == '.')
-	{
-		if (*format == '*')
-		{
-			format++;
-			(*int_queue)++;
-		}
-		else
-		{
-			while (ft_isdigit((unsigned char)*format))
-				format++;
-		}
-	}
-	return format;
-}
-
-const char *seek_mod(const char *format, int *mod)
-{
-	*mod = 0;
-	if (format[0] == 'h' && format[1] == 'h')
-	{
-		format += 2;
-	}
-	else if (format[0] == 'l' && format[1] == 'l')
-	{
-		*mod = ('l' << CHAR_BIT) + 'l';
-		format += 2;
-	}
-	else if (ft_strchr("ljztL", *format))
-	{
-		*mod = *format;
-		format++;
-	}
-	else if (ft_strchr("h", *format))
-	{
-		format++;
-	}
-	return format;
-}
 
 e_sp_type	get_type(const char specifier)
 {
@@ -112,7 +46,7 @@ char	*get_specifier(const char *string, t_format *format)
 		if (*traverse == '\0' || *traverse == ' ')
 		{
 			ft_putnstr(string, (traverse - string));
-			break ;
+			return (traverse);
 		}
 		if (ft_strchr(specifier, *traverse) != NULL)
 		{
@@ -123,7 +57,8 @@ char	*get_specifier(const char *string, t_format *format)
 			}
 			format->specifier = *traverse;
 			format->type = get_type(*traverse);
-			break ;
+			return (NULL);
 		}
 	}
+	return (NULL);
 }

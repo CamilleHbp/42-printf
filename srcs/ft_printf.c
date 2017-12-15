@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:46:29 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 14:50:06 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/15 23:29:49 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	char	*tmp;
-	char	*valid;
+	char	*specifier;
 	int32_t sp_type;
 
 	tmp = format;
@@ -44,6 +44,7 @@ int ft_printf(const char *format, ...)
 			ft_putchar(tmp);
 			continue;
 		}
+		tmp = parse_format(tmp, &ap)
 		if ((sp_type = is_sp_integer(++tmp)) != FAILURE)
 			; // parse_flag(sp_type);
 			// continue checking the type of the specifier
