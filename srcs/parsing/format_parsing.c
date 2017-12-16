@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/15 23:29:49 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/16 17:19:56 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	init_format(t_format *format)
 	format->flag = NULL;
 	format->width_flag = 0;
 	format->width = 0;
+	format->preci_flag = 0;
 	format->precision = 0;
 	format->length = unknown;
 	format->type = unknown;

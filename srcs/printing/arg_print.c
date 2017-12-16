@@ -6,8 +6,13 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/15 22:28:41 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/16 17:30:38 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arg_print.h"
+
+void	print_arg(t_format format, va_list *app)
+{
+	;
+}
