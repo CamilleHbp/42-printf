@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:31:21 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:37:55 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 ** again.
 */
 
-#include <stdio.h>
 int32_t	seek_width(char **string, t_format *format, va_list *app)
 {
 	uint32_t	digits;
@@ -39,7 +38,6 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 	{
 		format->width = (int32_t)va_arg(*app, int);
 		*string += 1;
-		printf("parse width: %d\n", format->width);
 		return (SUCCESS);
 	}
 	else if (ft_isdigit(**string))
@@ -48,7 +46,6 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 		digits = format->width;
 		while (digits > 9)
 		{
-			printf("digits: %d\n", digits);
 			*string += 1;
 			digits /= 10;
 		}

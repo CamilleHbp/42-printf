@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:36:05 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:37:47 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 ** If we find nothing,  0 is assumed.
 */
 
-#include <stdio.h>
 int32_t	seek_precision(char **string, t_format *format, va_list *app)
 {
 	uint32_t	digits;
