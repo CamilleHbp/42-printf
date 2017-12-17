@@ -6,13 +6,11 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 14:11:08 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 17:40:14 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "format_parsing.h"
-// DEBUG
-#include "stdio.h"
 
 /*
 ** FLAGS:
@@ -32,9 +30,16 @@
 **		If a precision is given with dDioOuUxX, the 0 flag is ignored.
 */
 
+/*
+** We traverse the list and check if the flag is not already there.
+** If it is, we do not add it, but return SUCCESS.
+*/
+
 static int32_t	add_flag(t_format *format, e_flag flag)
 {
 	t_flag	*list;
+	t_flag	*tmp;
+
 	if ((list = (t_flag*)malloc(sizeof(t_flag))) == NULL)
 		return (MALLOC_FAIL);
 	list->flag = flag;
@@ -43,9 +48,12 @@ static int32_t	add_flag(t_format *format, e_flag flag)
 		format->flag = list;
 	else
 	{
-		while (format->flag->next != NULL)
-			format->flag = format->flag->next;
-		format->flag->next = list;
+		tmp = format->flag;
+		if (tmp->flag == flag)
+			return (SUCCESS);
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = list;
 	}
 	return (SUCCESS);
 }

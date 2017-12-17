@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 14:11:39 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 17:40:55 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(void)
 	// ft_printf("Mine: \n string: %s\n char: %c\n int: %d\n", arg1, arg2, arg3);
 	printf("\n\n=======================================\n");
 	printf("Testing width detection\n");
-	printf("Expression: %%0-#30.*ld\n");
+	printf("Expression: %%-0.1-#30.*ld\n");
 	printf("-------------------------------------------\n");
-	ft_printf("Mine:\n%0-#30.*ld\n");
+	ft_printf("Mine:\n%-0.1-#+30.*ld\n");
 	printf("=======================================\n");
 }
