@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:30 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 12:39:02 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:33:23 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,19 @@ int32_t	seek_length(char **string, t_format *format)
 	{
 		if (format->length == length_unknown)
 			format->length = hh;
-		*string += 1;
+		*string += 2;
 		return (SUCCESS);
 	}
 	else if (**string == 'l' && *(*string + 1) == 'l')
 	{
 		add_length(format, ll);
-		*string += 1;
+		*string += 2;
 		return (SUCCESS);
 	}
 	else if ((found = ft_strchr(length, **string)) != NULL)
 	{
 		add_length(format, (found - length));
+		*string += 1;
 		return (SUCCESS);
 	}
 	return (FAILURE);

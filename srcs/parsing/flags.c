@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 17:40:14 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:25:46 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int32_t		seek_flag(char **string, t_format *format)
 	if (**string == '0' && ft_isdigit(*(*string - 1)))
 		return (FAILURE);
 	if ((found = ft_strchr(flag, **string)) != NULL)
+	{
+		*string += 1;
 		return (add_flag(format, (found - flag)));
+	}
 	return (FAILURE);
 }

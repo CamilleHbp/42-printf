@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 13:11:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 13:52:37 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 19:57:59 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,12 @@ static void	print_type(t_format format)
 			break ;
 	}
 }
-void	print_test(t_format format, va_list *app)
+void	print_test(t_format format)
 {
-	va_arg(*app, int);
+	//va_arg(*app, int);
 	// printf("\n----------------\n");
 	print_flags(format);
-	printf("width flag: %d\n", format.width_flag);
-	printf("width: %u\n", format.width);
-	printf("precision flag: %d\n", format.preci_flag);
+	printf("width: %d\n", format.width);
 	printf("precision: %u\n", format.precision);
 	print_length(format);
 	print_type(format);

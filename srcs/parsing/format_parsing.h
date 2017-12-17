@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 13:49:44 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 19:49:02 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ typedef struct	s_flag
 typedef struct	s_format
 {
 	t_flag		*flag;
-	t_bool		width_flag;
-	uint32_t	width;
-	t_bool		preci_flag;
-	uint32_t	precision;
+	int32_t		width;
+	int32_t		precision;
 	e_length	length;
 	e_sp_type	type;
 	char		specifier;
@@ -72,7 +70,7 @@ e_sp_type		get_type(char specifier);
 char			*parse_format(char *str, va_list *app);
 int32_t			seek_flag(char **string, t_format *format);
 int32_t			seek_length(char **string, t_format *format);
-int32_t			seek_precision(char **string, t_format *format);
-int32_t			seek_width(char **string, t_format *format);
+int32_t			seek_precision(char **string, t_format *format, va_list *app);
+int32_t			seek_width(char **string, t_format *format, va_list *app);
 
 #endif

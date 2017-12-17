@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 12:33:40 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:36:05 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,24 @@
 ** If we find nothing,  0 is assumed.
 */
 
-int32_t	seek_precision(char **string, t_format *format)
+#include <stdio.h>
+int32_t	seek_precision(char **string, t_format *format, va_list *app)
 {
 	uint32_t	digits;
 
 	if (**string != '.')
 		return (FAILURE);
-	if (*(*string + 1) == '*')
+	*string += 1;
+	if (*(*string) == '*')
 	{
-		format->preci_flag = 1;
+		format->precision = (int32_t)va_arg(*app, int);
 		*string += 1;
 		return (SUCCESS);
 	}
-	else if (ft_isdigit(*(*string + 1)))
+	else if (ft_isdigit(*(*string)))
 	{
-		format->precision = ft_atoi(*string + 1);
-		digits = format->width;
+		format->precision = ft_atoi(*string);
+		digits = format->precision;
 		while (digits > 9)
 		{
 			*string += 1;
@@ -63,5 +65,9 @@ int32_t	seek_precision(char **string, t_format *format)
 		}
 		return (SUCCESS);
 	}
-	return (FAILURE);
+	else
+	{
+		format->precision = 0;
+		return (SUCCESS);
+	}
 }

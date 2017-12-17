@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 13:23:56 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:32:46 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 static void	init_format(t_format *format)
 {
 	format->flag = NULL;
-	format->width_flag = 0;
 	format->width = 0;
-	format->preci_flag = 0;
 	format->precision = 0;
 	format->length = length_unknown;
 	format->type = type_unknown;
@@ -33,6 +31,7 @@ static void	init_format(t_format *format)
 ** already been printed.
 */
 
+#include <stdio.h>
 char	*parse_format(char *str, va_list *app)
 {
 	char		*ret;
@@ -44,16 +43,16 @@ char	*parse_format(char *str, va_list *app)
 		return (ret);
 	while (*str != format.specifier)
 	{
-		if (seek_flag(&str, &format) == SUCCESS)
-			{;}
-		else if (seek_width(&str, &format) == SUCCESS)
-			{;}
-		else if (seek_precision(&str, &format) == SUCCESS)
-			{;}
-		else if (seek_length(&str, &format) == SUCCESS)
-			{;}
-		++str;
+		printf("char: %c\n", *str);
+		seek_flag(&str, &format);
+		printf("char: %c\n", *str);
+		seek_width(&str, &format, app);
+		printf("char: %c\n", *str);
+		seek_precision(&str, &format, app);
+		printf("char: %c\n", *str);
+		seek_length(&str, &format);
+		printf("char: %c\n", *str);
 	}
-	print_test(format, app);
+	print_test(format);
 	return (++str);
 }
