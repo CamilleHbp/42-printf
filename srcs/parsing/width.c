@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:37:55 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:52:30 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 	{
 		format->width = ft_atoi(*string);
 		digits = format->width;
-		while (digits > 9)
+		while (digits > 0)
 		{
 			*string += 1;
 			digits /= 10;

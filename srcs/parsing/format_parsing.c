@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:38:17 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 20:51:02 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	init_format(t_format *format)
 ** already been printed.
 */
 
+#include <stdio.h>
 char	*parse_format(char *str, va_list *app)
 {
 	char		*ret;
@@ -43,9 +44,13 @@ char	*parse_format(char *str, va_list *app)
 	while (*str != format.specifier)
 	{
 		seek_flag(&str, &format);
+		// printf("flag done");
 		seek_width(&str, &format, app);
+		// printf("width done");
 		seek_precision(&str, &format, app);
+		//  printf("preci done");
 		seek_length(&str, &format);
+		// printf("length done");
 	}
 	print_test(format);
 	return (++str);
