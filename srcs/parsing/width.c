@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/16 17:00:33 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:33:30 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 ** again.
 */
 
-t_bool	seek_width(const char **string, t_format *format)
+int32_t	seek_width(char **string, t_format *format)
 {
 	uint32_t	digits;
 

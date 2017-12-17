@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/14 13:25:08 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:54:10 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include "libft.h"
 # include "format_parsing.h"
 
-# define SUCCESS (int32_t)0
-# define FAILURE (int32_t) - 1
+# define SUCCESS		(int32_t)0
+# define FAILURE		(int32_t)-1
+# define MALLOC_FAIL	(int32_t)-2
 
-int ft_printf(const char *format, ...);
+int	ft_printf(const char *format, ...);
 
 #endif

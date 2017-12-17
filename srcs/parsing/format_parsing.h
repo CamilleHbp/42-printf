@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/16 17:19:35 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 13:49:44 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef enum {
 	space,
 	pound,
 	zero,
-	none
+	flag_unknown
 }				e_flag;
 
 typedef enum {
@@ -37,7 +37,7 @@ typedef enum {
 	L,
 	hh,
 	ll,
-	unknown
+	length_unknown
 }				e_length;
 
 typedef enum {
@@ -46,13 +46,13 @@ typedef enum {
 	string,
 	void_ptr,
 	int_ptr,
-	unknown
+	type_unknown
 }				e_sp_type;
 
 typedef struct	s_flag
 {
-	e_flag	flag;
-	t_flag	*next_flag;
+	e_flag			flag;
+	struct s_flag	*next;
 }				t_flag;
 
 typedef struct	s_format
@@ -67,10 +67,12 @@ typedef struct	s_format
 	char		specifier;
 }				t_format;
 
-char			*get_specifier(const char *string, t_format *format);
-e_sp_type		get_type(const char specifier);
-int32_t			seek_flag(const char *string, t_format *format);
-t_bool			seek_length(const char **string, t_format *format);
-t_bool			seek_width(const char **string, t_format *format);
+char			*get_specifier(char *string, t_format *format);
+e_sp_type		get_type(char specifier);
+char			*parse_format(char *str, va_list *app);
+int32_t			seek_flag(char **string, t_format *format);
+int32_t			seek_length(char **string, t_format *format);
+int32_t			seek_precision(char **string, t_format *format);
+int32_t			seek_width(char **string, t_format *format);
 
 #endif

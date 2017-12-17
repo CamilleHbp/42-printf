@@ -6,11 +6,13 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/15 22:57:22 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 14:11:08 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "format_parsing.h"
+// DEBUG
+#include "stdio.h"
 
 /*
 ** FLAGS:
@@ -30,35 +32,33 @@
 **		If a precision is given with dDioOuUxX, the 0 flag is ignored.
 */
 
-static void	add_flag(t_flag *list, e_flag flag)
+static int32_t	add_flag(t_format *format, e_flag flag)
 {
-	if (list == NULL)
-		if ((list = (t_flag*)malloc(sizeof(t_flag))) == NULL)
-			return (NULL);
+	t_flag	*list;
+	if ((list = (t_flag*)malloc(sizeof(t_flag))) == NULL)
+		return (MALLOC_FAIL);
+	list->flag = flag;
+	list->next = NULL;
+	if (format->flag == NULL)
+		format->flag = list;
 	else
 	{
-		while (list->next_flag != NULL)
-			list = list->next_flag;
-		if ((list->next_flag = (t_flag*)malloc(sizeof(t_flag))) == NULL)
-			return (NULL);
-		list = list->next_flag;
+		while (format->flag->next != NULL)
+			format->flag = format->flag->next;
+		format->flag->next = list;
 	}
-	list->flag = flag;
-	list->next_flag = NULL;
+	return (SUCCESS);
 }
 
-t_bool	seek_flag(const char **string, t_format *format)
+int32_t		seek_flag(char **string, t_format *format)
 {
 	char	*flag;
 	char	*found;
 
 	flag = "-+ #0";
-	if (**string == '0' && is_digit(*(*string - 1)))
+	if (**string == '0' && ft_isdigit(*(*string - 1)))
 		return (FAILURE);
 	if ((found = ft_strchr(flag, **string)) != NULL)
-	{
-		add_flag(format->flag, (found - flag));
-		return (SUCCESS);
-	}
+		return (add_flag(format, (found - flag)));
 	return (FAILURE);
 }

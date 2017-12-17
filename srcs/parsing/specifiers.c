@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/16 17:10:43 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 13:03:14 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 ** modifiers.
 */
 
-e_sp_type	get_type(const char specifier)
+e_sp_type	get_type(char specifier)
 {
 	if (ft_strchr("dDioOuUxX", specifier))
 		return (integer);
@@ -49,12 +49,11 @@ e_sp_type	get_type(const char specifier)
 		return (floating_point);
 	else if (ft_strchr("cCsS", specifier))
 		return (string);
-	else if (strchr("p", specifier))
+	else if (ft_strchr("p", specifier))
 		return (void_ptr);
-	else if (strchr("n", specifier))
+	else if (ft_strchr("n", specifier))
 		return (int_ptr);
-	else
-		return (unknown);
+	return (type_unknown);
 }
 
 /*
@@ -63,7 +62,7 @@ e_sp_type	get_type(const char specifier)
 ** specifier is found
 */
 
-char	*get_specifier(const char *string, t_format *format)
+char	*get_specifier(char *string, t_format *format)
 {
 	char		*traverse;
 	char		*specifier;
@@ -88,6 +87,7 @@ char	*get_specifier(const char *string, t_format *format)
 			format->type = get_type(*traverse);
 			return (NULL);
 		}
+		++traverse;
 	}
 	return (NULL);
 }

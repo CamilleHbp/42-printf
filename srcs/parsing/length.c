@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:30 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/16 17:03:08 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:39:02 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 void	add_length(t_format *format, e_length len)
 {
-	if (format->length == unknown || format->length < len)
+	if (format->length == length_unknown || format->length < len)
 		format->length = len;
 }
 
@@ -44,7 +44,7 @@ void	add_length(t_format *format, e_length len)
 ** Else we add the length.
 */
 
-t_bool	seek_length(const char **string, t_format *format)
+int32_t	seek_length(char **string, t_format *format)
 {
 	char	*length;
 	char	*found;
@@ -52,7 +52,7 @@ t_bool	seek_length(const char **string, t_format *format)
 	length = "hljztL";
 	if (**string == 'h' && *(*string + 1) == 'h')
 	{
-		if (format->length == unknown)
+		if (format->length == length_unknown)
 			format->length = hh;
 		*string += 1;
 		return (SUCCESS);

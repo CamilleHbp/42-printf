@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/16 17:21:23 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:33:40 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 ** If we find nothing,  0 is assumed.
 */
 
-t_bool	seek_precision(const char **string, t_format *format)
+int32_t	seek_precision(char **string, t_format *format)
 {
 	uint32_t	digits;
 

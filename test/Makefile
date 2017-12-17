@@ -6,70 +6,57 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2017/12/17 13:23:11 by cbaillat         ###   ########.fr        #
+#    Updated: 2017/12/16 18:50:40 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := printf
+NAME  := test-printf
 
 #directories
-SRCS_DIR			:=	./srcs
-INC_DIR				:=	./srcs \
-						./srcs/parsing \
-						./srcs/printing \
-						./srcs/test \
-						./libft/srcs
-BUILD_DIR			:=	./build
-LIB_DIR				:=	./libft
+SRCS_DIR  := ../srcs/
+INC_DIR   := ../srcs/
+BUILD_DIR := ../build
+LIB_DIR   := ../libft
 
-
-
-# sources
-SRCS	:=	$(SRC_DIR)/main.c \
-			$(SRC_DIR)/ft_printf.c
-SRCS	+=	$(SRC_DIR)/parsing/flags.c \
-			$(SRC_DIR)/parsing/format_parsing.c \
-			$(SRC_DIR)/parsing/length.c \
-			$(SRC_DIR)/parsing/precision.c \
-			$(SRC_DIR)/parsing/specifiers.c \
-			$(SRC_DIR)/parsing/width.c
-SRCS	+=	$(SRC_DIR)/printing/arg_print.c
-SRCS	+=	$(SRC_DIR)/test/print_test.c
-# object files
-OBJECTS	:= $(patsubst %,$(BUILD_DIR)/%,$(SRCS:.c=.o))
+# src / obj files
+SRCS    :=	test.c \
+			ft_printf.c \
+			format_parsing.c \
+			specifiers.c \
+			flags.c \
+			width.c \
+			precision.c \
+			.c
+OBJECTS := $(patsubst %,$(BUILD_DIR)/%,$(SRCS:.c=.o))
 # objects dependencies
 DEPS       = $(OBJECTS:.o:.d)
 DEPS_FLAGS = -MD -MP
 
 # # compiler and flags
-CC		:= gcc
-CFLAGS	:= -g -Wall -Wextra -Werror
-CFLAGS += $(foreach d, $(INC_DIR), -I$d)
+CC     := gcc
+CFLAGS := -g  -Wall -Wextra -Werror
 
 # # libraries
-LIBS		:= ft
-LIB_FLAGS	:= -L$(LIB_DIR) -l$(LIBS)
+LIBS := ft
+LIB_FLAGS := -L$(LIB_DIR) -l$(LIBS)
 
 # echo output colours
-CYAN	= \e[1;36m
-RED		= \033[1;31m
-WHITE	= \033[1;37m
-NC		= \033[0m
+CYAN = \e[1;36m
+RED  = \033[1;31m
+WHITE  = \033[1;37m
+NC   = \033[0m
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(OBJECTS_PARSING) $(OBJECTS_PRINTING)
+$(NAME): $(OBJECTS)
 	@make -C $(LIB_DIR)/
 	@echo "[Building ${RED}executable${NC}]"
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIB_FLAGS) -o $(NAME)
 
 $(BUILD_DIR)/%.o:$(SRCS_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
-	@mkdir -p $(BUILD_DIR)/parsing
-	@mkdir -p $(BUILD_DIR)/printing
-	@mkdir -p $(BUILD_DIR)/test
 	@echo "[Building $@...]"
 	@$(CC) $(CFLAGS) $(DEPS_FLAGS) -I $(INC_DIR) -o $@ -c $<
 
