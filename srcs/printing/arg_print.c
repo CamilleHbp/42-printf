@@ -6,23 +6,30 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 21:44:03 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/19 17:15:29 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "arg_print.h"
 
-// static int32_t		print_integer(t_format format, __int128_t integer)
-// {
-	// ;
-// }
 
 int32_t		print_arg(t_format format, va_list *app)
 {
-	if (format.specifier == "diu")
+	if (format.specifier == "di")
 		print_integer(format, *app));
 	else if (format.specifier == "f")
 		print_float(format, *app));
-	else if (format.specifier == "oOuUbUxX")
+	else if (format.specifier == "oubxX")
 		print_base(format, *app));
+	else if (format.specifier == "cC")
+		print_char(format, *app));
+	else if (format.specifier == "s")
+		print_string(format, *app));
+	else if (format.specifier == "S")
+		print_wstring(format, *app));
+	else if (format.specifier == "p")
+		print_pointer(format, *app));
+	else if (format.specifier == "n")
+		return_written_char(format, *app));
+
 }

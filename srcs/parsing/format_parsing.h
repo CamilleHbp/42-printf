@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 19:49:02 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/19 19:24:17 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,16 @@ typedef struct	s_format
 	t_flag		*flag;
 	int32_t		width;
 	int32_t		precision;
+	int8_t		uppercase;
 	e_length	length;
 	e_sp_type	type;
 	char		specifier;
-}				t_format;
+}				t_fkormat;
 
 char			*get_specifier(char *string, t_format *format);
 e_sp_type		get_type(char specifier);
 char			*parse_format(char *str, va_list *app);
+int32_t			search_flag(t_flag *list, e_flag flag);
 int32_t			seek_flag(char **string, t_format *format);
 int32_t			seek_length(char **string, t_format *format);
 int32_t			seek_precision(char **string, t_format *format, va_list *app);

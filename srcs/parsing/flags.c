@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:25:46 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/19 19:16:45 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@
 ** We traverse the list and check if the flag is not already there.
 ** If it is, we do not add it, but return SUCCESS.
 */
+
+int32_t	search_flag(t_flag *list, e_flag flag)
+{
+	while (list->next != NULL)
+	{
+		if (list->flag == flag)
+			return (SUCCESS);
+		list = list->next;
+	}
+	return (FAILURE);
+}
 
 static int32_t	add_flag(t_format *format, e_flag flag)
 {

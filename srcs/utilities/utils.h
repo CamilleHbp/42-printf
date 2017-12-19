@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_print.h                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 22:28:52 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/18 10:14:29 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/19 17:58:28 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/19 19:16:45 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARG_PRINT_H
-# define ARG_PRINT_H
+#ifndef UTILS_H
+# define UTILS_H
 
 #include "ft_printf.h"
-#include "format_parsing.h"
 
-#define X64_SIZE (size_t)64
+# define PAD_MINUS	(uint8_t)1
+# define PAD		(uint8_t)0
+# define ITOA		(uint8_t)33
 
-size_t		buffered_print(void *data, size_t size)
+
+uintmax_t	absolute(intmax_t n);
+void		print_itoa(intmax_t n, t_format format);
+int32_t		max(int32_t n);
 
 #endif

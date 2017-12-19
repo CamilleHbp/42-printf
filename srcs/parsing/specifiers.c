@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:04:55 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/19 19:26:36 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ char	*get_specifier(char *string, t_format *format)
 			if (ft_strchr("DUO", *traverse) != NULL)
 			{
 				format->length = l;
+				*traverse += 32;
+			}
+			if (ft_strchr("XFEGA", *traverse) != NULL)
+			{
+				format->uppercase = UPPERCASE;
 				*traverse += 32;
 			}
 			format->specifier = *traverse;

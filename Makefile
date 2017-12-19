@@ -6,7 +6,7 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2017/12/17 20:46:45 by cbaillat         ###   ########.fr        #
+#    Updated: 2017/12/19 16:31:42 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC_DIR				:=	./srcs \
 						./srcs/parsing \
 						./srcs/printing \
 						./srcs/test \
-						./libft/srcs
+						./libft/includes
 BUILD_DIR			:=	./build
 LIB_DIR				:=	./libft
 
