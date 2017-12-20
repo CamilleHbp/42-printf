@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "format_parsing.h"
+#include "parsing.h"
 
 /*
 ** LENGTH:
@@ -27,45 +27,34 @@
 ** L  |						long double
 */
 
-/*
-** We just just add the length if is not specified (unknown) or if it is
-** bigger than the other flags we found.
-*/
-
-void	add_length(t_format *format, e_length len)
-{
-	if (format->length == length_unknown || format->length < len)
-		format->length = len;
-}
-
-/*
-** First we need to check for the two flag with two letters, and increment the
-** string pointer iif we find a double letter.
-** Else we add the length.
-*/
-
 int32_t	seek_length(char **string, t_format *format)
 {
 	char	*length;
 	char	*found;
 
 	length = "hljztL";
-	if (**string == 'h' && *(*string + 1) == 'h')
+	if ((found = ft_strchr(length, **string)) != NULL)
 	{
-		if (format->length == length_unknown)
-			format->length = hh;
-		*string += 2;
-		return (SUCCESS);
-	}
-	else if (**string == 'l' && *(*string + 1) == 'l')
-	{
-		add_length(format, ll);
-		*string += 2;
-		return (SUCCESS);
-	}
-	else if ((found = ft_strchr(length, **string)) != NULL)
-	{
-		add_length(format, (found - length));
+		if (**string == 'h')
+		{
+			if (format->flags & SHORT)
+				format->flags &= SSHORT;
+			format->flags &= SHORT;
+		}
+		else if (**string == 'l')
+		{
+			if (format->flags & LONG)
+				format->flags &= LLONG;
+			format->flags &= LLONG;
+		}
+		else if (**string == 'j')
+			format->flags &= INTMAX;
+		else if (**string == 'z')
+			format->flags &= SIZE_T;
+		else if (**string == 't')
+			format->flags &= PTRDIFF;
+		else if (**string == 'L')
+			format->flags &= LDOUBLE;
 		*string += 1;
 		return (SUCCESS);
 	}

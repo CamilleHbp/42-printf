@@ -1,75 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_parsing.h                                   :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 10:04:31 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 19:24:17 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/20 23:37:13 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/20 23:37:13 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORMAT_PARSING_H
-#define FORMAT_PARSING_H
+# define FORMAT_PARSING_H
 
-#include "ft_printf.h"
+# include "ft_printf.h"
+#include "utils.h"
 
 /*
-** The following enums will help to make the code cleaner
+** The following flags are used thourought the code and stored in an int32.
+** All the flags are stored as single bits. It is faster when checking, and does
+** not require as much memory (secondary to the first reason).
 */
 
-typedef enum {
-	minus = 0,
-	plus,
-	space,
-	pound,
-	zero,
-	flag_unknown
-}				e_flag;
+# define RIGHT_PAD	(1 << 0)
+# define SIGN		(1 << 1)
+# define PREFIX		(1 << 2)
+# define SPACE		(1 << 3)
+# define ZERO_PAD	(1 << 4)
 
-typedef enum {
-	h = 0,
-	l,
-	j,
-	z,
-	t,
-	L,
-	hh,
-	ll,
-	length_unknown
-}				e_length;
+# define UPPERCASE	(1 << 5)
+# define UNICODE	(1 << 6)
 
-typedef enum {
-	integer = 0,
-	floating_point,
-	string,
-	void_ptr,
-	int_ptr,
-	type_unknown
-}				e_sp_type;
+# define SHORT		(1 << 7)
+# define SSHORT		(1 << 8)
+# define LONG		(1 << 9)
+# define LLONG		(1 << 10)
+# define INTMAX		(1 << 11)
+# define SIZE_T		(1 << 12)
+# define PTRDIFF	(1 << 13)
+# define LDOUBLE	(1 << 14)
 
-typedef struct	s_flag
-{
-	e_flag			flag;
-	struct s_flag	*next;
-}				t_flag;
+# define MIN_LEN	(1 << 15)
+# define APP_PRECI	(1 << 16)
+# define POINTER	(1 << 17)
 
 typedef struct	s_format
 {
-	t_flag		*flag;
+	uint32_t	flags;
 	int32_t		width;
 	int32_t		precision;
-	int8_t		uppercase;
-	e_length	length;
-	e_sp_type	type;
 	char		specifier;
-}				t_fkormat;
+}				t_format;
 
 char			*get_specifier(char *string, t_format *format);
-e_sp_type		get_type(char specifier);
 char			*parse_format(char *str, va_list *app);
-int32_t			search_flag(t_flag *list, e_flag flag);
 int32_t			seek_flag(char **string, t_format *format);
 int32_t			seek_length(char **string, t_format *format);
 int32_t			seek_precision(char **string, t_format *format, va_list *app);

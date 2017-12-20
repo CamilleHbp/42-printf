@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "format_parsing.h"
+#include "parsing.h"
 
 /*
 ** SPECIFIERS:
@@ -37,30 +37,27 @@
 */
 
 /*
-** We get the type of specifier to know how to interpret the different flags and
-** modifiers.
-*/
-
-e_sp_type	get_type(char specifier)
-{
-	if (ft_strchr("dDioOuUxX", specifier))
-		return (integer);
-	else if (ft_strchr("fFeEgGaA", specifier))
-		return (floating_point);
-	else if (ft_strchr("cCsS", specifier))
-		return (string);
-	else if (ft_strchr("p", specifier))
-		return (void_ptr);
-	else if (ft_strchr("n", specifier))
-		return (int_ptr);
-	return (type_unknown);
-}
-
-/*
 ** Either returns NULL if the specifier is found
 ** or the pointer to which the string should continue to be parsed if no
 ** specifier is found
+**
+** 1- We check if there actually is a specifier. If we can't find one, we print
+** all the preceding arguments as if they were a string, and return a pointer
+** to the end of that bit, so that we can continue parsing the string.
+** 2- If we find an uppercase letter, we set the corresponding flag and put the
+** letter in lowercase.
 */
+
+static void	set_upper_flag(char c, t_format *format)
+{
+	if (ft_strchr("DUO", c) != NULL)
+		format->flags &= LONG;
+	if (ft_strchr("XFEGA", c) != NULL)
+		format->flags &= UPPERCASE;
+	if (ft_strchr("CS", c) != NULL)
+		format->flags &= UNICODE;
+	c += 32;
+}
 
 char	*get_specifier(char *string, t_format *format)
 {
@@ -78,21 +75,11 @@ char	*get_specifier(char *string, t_format *format)
 		}
 		if (ft_strchr(specifier, *traverse) != NULL)
 		{
-			if (ft_strchr("DUO", *traverse) != NULL)
-			{
-				format->length = l;
-				*traverse += 32;
-			}
-			if (ft_strchr("XFEGA", *traverse) != NULL)
-			{
-				format->uppercase = UPPERCASE;
-				*traverse += 32;
-			}
+			if (ft_isupper(*traverse))
+				set_upper_flag(*traverse, format);
 			format->specifier = *traverse;
-			format->type = get_type(*traverse);
 			return (NULL);
 		}
 		++traverse;
 	}
-	return (NULL);
 }

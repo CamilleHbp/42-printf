@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa.c                                             :+:      :+:    :+:   */
+/*   nums_integers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/19 17:23:38 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 19:52:02 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/20 23:33:14 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printing.h"
 
 
 void	print_itoa(intmax_t n, t_format format)

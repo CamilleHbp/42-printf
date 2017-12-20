@@ -18,13 +18,11 @@
 # include <stdlib.h>
 
 # include "libft.h"
-# include "format_parsing.h"
+# include "parsing.h"
 
 # define SUCCESS		(int32_t)0
 # define FAILURE		(int32_t)-1
 # define MALLOC_FAIL	(int32_t)-2
-# define UPPERCASE		(int8_t)1
-# define LOWERCASE		(int8_t)0
 
 int	ft_printf(const char *format, ...);
 

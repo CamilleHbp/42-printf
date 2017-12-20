@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "format_parsing.h"
+#include "parsing.h"
 
 /*
 ** WIDTH:
@@ -37,6 +37,11 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 	if (**string == '*')
 	{
 		format->width = (int32_t)va_arg(*app, int);
+		if (format->width < 0)
+		{
+			format->flags &= RIGHT_PAD;
+			format->width = -(format->width);
+		}
 		*string += 1;
 		return (SUCCESS);
 	}

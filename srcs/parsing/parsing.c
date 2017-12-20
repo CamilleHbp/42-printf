@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_parsing.c                                   :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/14 10:04:50 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 19:46:22 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/20 23:36:54 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/20 23:36:54 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "format_parsing.h"
-#include "arg_print.h"
+#include "parsing.h"
+#include "printing.h"
 // DEBUG
 #include "print_test.h"
 
 static void	init_format(t_format *format)
 {
-	format->flag = NULL;
+	format->flags = 0;
 	format->width = 0;
 	format->precision = 1;
-	format->length = length_unknown;
-	format->uppercase = LOWERCASE;
-	format->type = type_unknown;
 	format->specifier = '\0';
 }
-
 
 /*
 ** Returns a pointer to the character after the format, or after what has

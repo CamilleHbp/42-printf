@@ -19,9 +19,9 @@
 # define PAD		(uint8_t)0
 # define ITOA		(uint8_t)33
 
+# define REMOVE(flag) ~flag
 
 uintmax_t	absolute(intmax_t n);
-void		print_itoa(intmax_t n, t_format format);
 int32_t		max(int32_t n);
 
 #endif

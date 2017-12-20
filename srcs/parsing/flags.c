@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "format_parsing.h"
+#include "parsing.h"
 
 /*
 ** FLAGS:
@@ -30,45 +30,6 @@
 **		If a precision is given with dDioOuUxX, the 0 flag is ignored.
 */
 
-/*
-** We traverse the list and check if the flag is not already there.
-** If it is, we do not add it, but return SUCCESS.
-*/
-
-int32_t	search_flag(t_flag *list, e_flag flag)
-{
-	while (list->next != NULL)
-	{
-		if (list->flag == flag)
-			return (SUCCESS);
-		list = list->next;
-	}
-	return (FAILURE);
-}
-
-static int32_t	add_flag(t_format *format, e_flag flag)
-{
-	t_flag	*list;
-	t_flag	*tmp;
-
-	if ((list = (t_flag*)malloc(sizeof(t_flag))) == NULL)
-		return (MALLOC_FAIL);
-	list->flag = flag;
-	list->next = NULL;
-	if (format->flag == NULL)
-		format->flag = list;
-	else
-	{
-		tmp = format->flag;
-		if (tmp->flag == flag)
-			return (SUCCESS);
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = list;
-	}
-	return (SUCCESS);
-}
-
 int32_t		seek_flag(char **string, t_format *format)
 {
 	char	*flag;
@@ -79,8 +40,22 @@ int32_t		seek_flag(char **string, t_format *format)
 		return (FAILURE);
 	if ((found = ft_strchr(flag, **string)) != NULL)
 	{
+		if (**string == '#')
+			format->flags &= PREFIX;
+		else if (**string == '-')
+		{
+			format->flags &= RIGHT_PAD;
+			format->flags &= REMOVE(ZERO_PAD);
+		}
+		else if (**string == '+')
+			format->flags &= SIGN;
+		else if (**string == ' ')
+			format->flags &= SPACE;
+		else if (**string == '0')
+			if (!(format->flags & RIGHT_PAD))
+				format->flags &= ZERO_PAD;
 		*string += 1;
-		return (add_flag(format, (found - flag)));
+		return (SUCCESS);
 	}
 	return (FAILURE);
 }

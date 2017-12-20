@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c                                          :+:      :+:    :+:   */
+/*   nums_common.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/19 17:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 18:23:55 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/20 23:33:22 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "arg_print.h"
+#include "printing.h"
 
 static int32_t		print_integer(t_format format, va_list *app)
 {

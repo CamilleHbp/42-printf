@@ -13,14 +13,11 @@
 NAME := printf
 
 #directories
-SRCS_DIR			:=	./srcs
-INC_DIR				:=	./srcs \
-						./srcs/parsing \
-						./srcs/printing \
-						./srcs/test \
-						./libft/includes
-BUILD_DIR			:=	./build
-LIB_DIR				:=	./libft
+SRCS_DIR	:=	./srcs
+INC_DIR		:=	./includes \
+				./libft/includes
+OBJ_DIR		:=	./obj
+LIB_DIR		:=	./libft
 
 
 
@@ -28,15 +25,15 @@ LIB_DIR				:=	./libft
 SRCS	:=	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/ft_printf.c
 SRCS	+=	$(SRC_DIR)/parsing/flags.c \
-			$(SRC_DIR)/parsing/format_parsing.c \
+			$(SRC_DIR)/parsing/parsing.c \
 			$(SRC_DIR)/parsing/length.c \
 			$(SRC_DIR)/parsing/precision.c \
 			$(SRC_DIR)/parsing/specifiers.c \
 			$(SRC_DIR)/parsing/width.c
-SRCS	+=	$(SRC_DIR)/printing/arg_print.c
+#SRCS	+=	$(SRC_DIR)/printing/printing.c
 SRCS	+=	$(SRC_DIR)/test/print_test.c
 # object files
-OBJECTS	:= $(patsubst %,$(BUILD_DIR)/%,$(SRCS:.c=.o))
+OBJECTS	:= $(patsubst %,$(OBJ_DIR)/%,$(SRCS:.c=.o))
 # objects dependencies
 DEPS       = $(OBJECTS:.o:.d)
 DEPS_FLAGS = -MD -MP
@@ -65,18 +62,18 @@ $(NAME): $(OBJECTS) $(OBJECTS_PARSING) $(OBJECTS_PRINTING)
 	@echo "[Building ${RED}executable${NC}]"
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIB_FLAGS) -o $(NAME)
 
-$(BUILD_DIR)/%.o:$(SRCS_DIR)/%.c
-	@mkdir -p $(BUILD_DIR)
-	@mkdir -p $(BUILD_DIR)/parsing
-	@mkdir -p $(BUILD_DIR)/printing
-	@mkdir -p $(BUILD_DIR)/test
+$(OBJ_DIR)/%.o:$(SRCS_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/parsing
+	@mkdir -p $(OBJ_DIR)/printing
+	@mkdir -p $(OBJ_DIR)/test
 	@echo "[Building $@...]"
 	@$(CC) $(CFLAGS) $(DEPS_FLAGS) -I $(INC_DIR) -o $@ -c $<
 
 clean:
 	@echo "[Cleaning ${RED}executable${NC} objects]"
 	@make clean -C $(LIB_DIR)
-	@rm -rf $(BUILD_DIR)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@echo  "[Cleaning ${RED}executable${NC}]"
