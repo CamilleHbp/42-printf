@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "printing.h"
-#include "stdio.h"
 
 static void	print_flags(t_format format)
 {
@@ -60,7 +59,7 @@ void	print_test(t_format format)
 	ft_putstr("\nprecision: ");
 	ft_putnbr(format.precision);
 	print_length(format);
-	printf("specifier: ");
+	ft_putstr("specifier: ");
 	ft_putchar(format.specifier);
 	ft_putchar('\n');
 	ft_putstr("----------------\n");

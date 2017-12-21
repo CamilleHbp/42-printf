@@ -19,14 +19,12 @@ int32_t		print_arg(t_format format, va_list *app)
 		print_integer(format, *app);
 	else if (format.specifier == "f")
 		print_float(format, *app);
-	else if (format.specifier == "oubxX")
+	else if (format.specifier == "oubx")
 		print_base(format, *app);
-	else if (format.specifier == "cC")
+	else if (format.specifier == "c")
 		print_char(format, *app);
 	else if (format.specifier == "s")
 		print_string(format, *app);
-	else if (format.specifier == "S")
-		print_wstring(format, *app);
 	else if (format.specifier == "p")
 		print_pointer(format, *app);
 	else if (format.specifier == "n")

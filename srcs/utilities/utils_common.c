@@ -12,33 +12,45 @@
 
 #include "utils.h"
 
-uintmax_t	absolute(intmax_t n)
+
+
+size_t	get_nb_len(uintmax_t nb, uint8_t base)
 {
-	if (n < 0)
-		return ((uintmax_t)-n);
-	return ((uintmax_t)n);
+	size_t	nb_len;
+
+	if (nb == 0)
+		return (1);
+	i = 0;
+	while (nb >= 0)
+	{
+		nb /= base;
+		nb_len++;
+	}
+	return (nb_len);
 }
 
-int32_t		max(int32_t a, int32_t b)
+void	padd_value(char pad_char, size_t padding)
 {
-	if (b > a)
-		return (b);
-	return (a);
+	while (padding-- > 0)
+		buffered_print(pad_char, 1);
 }
 
-void	padd_value(t_format format, int32_t flag, int32_t padding)
+/* void	padd_value(t_format format, int32_t flag, int32_t padding)
 {
 	char	padding_char;
 
-	if (!padding)
+	if (padding == 0)
 		return ;
 	padding_char = ' ';
-	if (search(format.flag, zero) == SUCCESS)
-		padding_char = '0';
-	if ((flag == PAD) && (search_flag(format.flag, minus) == FAILURE))
+	if ((flag == PAD_LEFT) && !(format.flags & RIGHT_PAD))
+	{
+		if (format.flags & ZERO_PAD)
+			padding_char = '0';
 		while (padding--)
-	buffered_print(padding_char, 1);
-	else if ((flag == PAD_MINUS) && (search_flag(format.flag, minus) == SUCCESS))
+			buffered_print(padding_char, 1);
+	}
+	else if ((flag == PAD_RIGHT) && (format.flags & RIGHT_PAD))
 		while (padding--)
 			buffered_print(padding_char, 1);
 }
+ */

@@ -44,6 +44,11 @@
 # define APP_PRECI	(1 << 16)
 # define POINTER	(1 << 17)
 
+/*
+** This little macro does not execute code. It is simply here to remember that
+** by ANDing with the complement of the flag, I actually unset the flag.
+*/
+
 typedef struct	s_format
 {
 	uint32_t	flags;

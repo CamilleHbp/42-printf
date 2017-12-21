@@ -15,13 +15,7 @@
 
 #include "ft_printf.h"
 
-# define PAD_MINUS	(uint8_t)1
-# define PAD		(uint8_t)0
-# define ITOA		(uint8_t)33
-
-# define REMOVE(flag) ~flag
-
-uintmax_t	absolute(intmax_t n);
-int32_t		max(int32_t n);
+size_t		get_nb_len(uintmax_t nb, uint8_t base);
+void		padd_value(char char_pad, int32_t padding);
 
 #endif

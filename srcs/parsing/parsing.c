@@ -27,8 +27,6 @@ static void	init_format(t_format *format)
 ** Returns a pointer to the character after the format, or after what has
 ** already been printed.
 */
-
-#include <stdio.h>
 char	*parse_format(char *str, va_list *app)
 {
 	char		*ret;

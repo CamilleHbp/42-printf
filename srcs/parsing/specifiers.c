@@ -64,7 +64,7 @@ char	*get_specifier(char *string, t_format *format)
 	char		*traverse;
 	char		*specifier;
 
-	specifier = "dDiuUoOxXfFeEgGaAcCsSpn%";
+	specifier = "dDiuUboOxXfFeEgGaAcCsSpn%";
 	traverse = string;
 	while (42)
 	{

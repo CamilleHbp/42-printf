@@ -51,7 +51,6 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 	{
 		format->precision = (int32_t)va_arg(*app, int);
 		*string += 1;
-		return (SUCCESS);
 	}
 	else if (ft_isdigit(**string))
 	{
@@ -62,11 +61,8 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 			*string += 1;
 			digits /= 10;
 		}
-		return (SUCCESS);
 	}
 	else
-	{
 		format->precision = 0;
-		return (SUCCESS);
-	}
+	return (SUCCESS);
 }

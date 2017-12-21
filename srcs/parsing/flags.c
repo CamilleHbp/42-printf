@@ -45,7 +45,7 @@ int32_t		seek_flag(char **string, t_format *format)
 		else if (**string == '-')
 		{
 			format->flags &= RIGHT_PAD;
-			format->flags &= REMOVE(ZERO_PAD);
+			format->flags &= ~ZERO_PAD;
 		}
 		else if (**string == '+')
 			format->flags &= SIGN;
