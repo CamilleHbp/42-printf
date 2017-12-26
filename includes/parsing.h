@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:13 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/20 23:37:13 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/26 18:30:59 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define LDOUBLE	(1 << 14)
 
 # define MIN_LEN	(1 << 15)
-# define APP_PRECI	(1 << 16)
+# define PRECISION	(1 << 16)
 # define POINTER	(1 << 17)
 
 /*
