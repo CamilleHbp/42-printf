@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 17:19:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/27 10:39:13 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 
 void	itoa_base(uintmax_t nb, int8_t base, char s[ITOA], t_format format)
 {
-	int32_t		len;
+	uintmax_t	tmp;
+	size_t		len;
 	char		*print;
 
-	if (nb && (format.specifier != 'p')
-			&& (format.flags & ZERO_PAD)
-			&& (format.flags & PREFIX)
-			&& base == 16
-			&& (format.length != ll)
-			&& p->printed > 3)
-		p->printed -= 2;
-	len = p->printed;
-	if (format.uppercase == UPPERCASE)
-		print = '0123456789ABCDEF';
-	print = '0123456789abcdef';
+	tmp = nb;
+	len = 1;
+	while ((tmp /= base) > 0)
+		++len;
+	if (format.flags & UPPERCASE)
+		print = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	print = "0123456789abcdefghijklmnopqrstuvwxyz";
 	while (len--)
 	{
-		s[len] = print[(nb % b)];
-		absolute_n /= b;
+		s[len] = print[(nb % base)];
+		n /= base;
 	}
-	(format.flags & F_APP_PRECI && p->f & F_ZERO) ? s[0] = ' ' : 0;
-}
+	if ((format.flags & PRECISION) && (format.precision == 0))
+		s[0] = '\0';
+	else
+		s[0] = '0';
+ }
 
 static void	print_prefix(intmax_t nb, uint8_t base, char *prefix, t_format *format)
 {
 	if (base == 10)
 	{
 		if (nb < 0)
-			buffered_print('-', 1);
+			buffered_print("-", 1);
 		else if ((format.flags & SIGN))
-			buffered_print('+', 1);
+			buffered_print("+", 1);
 		else if ((format.flags & BLANK))
-			buffered_print(' ', 1);
+			buffered_print(" ", 1);
 	}
 	else if (nb != 0)
 	{
 		if (format.flags & PREFIX)
-			buffered_print(prefix, 1);
+			buffered_print(prefix, ft_strlen(prefix));
 	}
 }
 
@@ -83,22 +83,4 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format *format)
 	atoi_base(ft_absolute(nb), base);
 	if (format.flags & RIGHT_PAD)
 		padd_value(' ', format.width);
-}
-ssize_t	prefix_management(uintmax_t nbr, uint8_t base, t_format *format, char *prefix)
-{
-	unsigned	nbr_len;
-	size_t		nbr_cut;
-
-	nbr_len = get_nb_display_len(nbr, base, NULL, arg) + ft_strlen(prefix);
-	nbr_cut = ft_strlen(prefix);
-	if ((format.width) && !(format.flags & RIGHT_PAD) && !(format.flags && ZERO_PAD))
-	{
-		padd_value(nbr_len, arg->width, ' ');
-		nbr_cut += ft_max(arg->width - nbr_len, 0);
-		arg->got_width = 0;
-	}
-	else if (arg->got_width)
-		arg->width -= ft_strlen(prefix);
-	ft_putstr(prefix);
-	return (ft_printf_handle_uint(nbr, arg, base, NULL) + nbr_cut);
 }

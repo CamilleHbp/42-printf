@@ -6,14 +6,14 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 20:33:32 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:45:59 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printing.h"
 
-ssize_t	print_string(t_format format, va_list *app)
+size_t	print_string(t_format format, va_list *app)
 {
 	char	*str;
 	size_t	len;

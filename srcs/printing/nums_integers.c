@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/20 23:33:14 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/27 10:19:16 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static intmax_t	return_integer(t_format format, va_list *app)
 	return (cast);
 }
 
-void	print_itoa(intmax_t n, t_format format)
+/* void	print_itoa(intmax_t n, t_format format)
 {
 	char		n_buff[ITOA];
 	uintmax_t	absolute_n;
@@ -55,9 +55,7 @@ void	print_itoa(intmax_t n, t_format format)
 	char_printed = ft_max(char_printed, format.precision);
 	if (n < 0 || (format.flags & SIGN) || (format.flags & SPACE))
 		++char_printed;
-	if (char_printed < format.width)
-		padding = format.width - char_printed;
-	//padding = (char_printed > format.width) ? 0 : format.width - char_printed;
+	padding = (char_printed > format.width) ? 0 : format.width - char_printed;
 	padd_value(format, PAD_LEFT, padding);
 	absolute_n = ft_absolute(n);
 	itoa_base(absolute_n, 10, n_buff, p);
@@ -67,3 +65,4 @@ void	print_itoa(intmax_t n, t_format format)
 	buffered_print(n_buff, char_printed);
 	padd_value(format, PAD_RIGHT, padding);
 }
+ */
