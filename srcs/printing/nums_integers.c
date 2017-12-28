@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/27 10:19:16 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/27 23:09:34 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static intmax_t	return_integer(t_format format, va_list *app)
 	else
 		cast = (int)va_arg(*app, int);
 	return (cast);
+}
+
+size_t	print_integer(t_format format, va_list *app)
+{
+
 }
 
 /* void	print_itoa(intmax_t n, t_format format)

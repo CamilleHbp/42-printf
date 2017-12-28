@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 19:52:02 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:30:06 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <stddef.h>
 # include <stdint.h>
 # include <stdlib.h>
 
