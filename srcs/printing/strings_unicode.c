@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:07:28 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:50:00 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 22:00:49 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	buffer_3bytes(wchar_t wchar, t_buffer *buffer)
 
 		tmp[0] = ((wchar >> 12) & 0x0F) | 0xE0;
 		tmp[1] = ((wchar >> 6) & 0x3F) | 0x80;
-		tmp[2] = (wchar & 0x3F) | 0x81;
+		tmp[2] = (wchar & 0x3F) | 0x80;
 		buffered_print(tmp, 3, buffer);
 }
 

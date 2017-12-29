@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:47:16 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 21:59:22 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,11 @@ size_t	print_string(t_format format, va_list *app, t_buffer *buffer)
 		str = va_arg(*app, char*);
 	len = 0;
 	if (format.flags & UNICODE)
-	{
-		while (wstr[len] != L'\0')
-			++len;
-	ft_putstr("wlen: ");
-	ft_putnbr(len);
-	ft_putchar('\n');
-		len = (format.flags & PRECISION) ? ft_min(format.precision, len) : len;
-	}
+		len = (format.flags & PRECISION) ?
+		ft_min(format.precision, ft_wstrlen(wstr)) : (intmax_t)ft_wstrlen(wstr);
 	else
-		len = (format.flags & PRECISION) ? ft_min(format.precision, ft_strlen(str)) : (intmax_t)ft_strlen(str);
-	ft_putstr("len: ");
-	ft_putnbr(len);
-	ft_putchar('\n');
-	ft_putstr("precision: ");
-	ft_putnbr(format.precision);
-	ft_putchar('\n');
+		len = (format.flags & PRECISION) ?
+		ft_min(format.precision, ft_strlen(str)) : (intmax_t)ft_strlen(str);
 	width = (format.width - len > 0) ? format.width - len : 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value(" ", width, buffer);
