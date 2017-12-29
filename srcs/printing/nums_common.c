@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 19:35:42 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 23:08:30 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 	if ((nb < 0) || (format.flags & SIGN) || (format.flags & SPACE))
 		format.width -= 1;
 	nb_len = get_nb_len(nb, base);
-	format.width -= ((format.flags & ZERO_PAD) ? 0 : ft_strlen(prefix));
+	format.width -= (format.flags & PREFIX) ? ft_strlen(prefix) : 0;
 	format.width -= ft_max(format.precision, nb_len);
 	// If we need to right justify, and pad with spaces, we do before the prefix
 	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))

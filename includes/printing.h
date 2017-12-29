@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:49:27 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 22:41:19 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	buffer_wchar(wchar_t wchar, t_buffer *buffer);
 void	buffer_wstring(wchar_t *wstr, size_t len, t_buffer *buffer);
 // void		print_itoa(intmax_t n, t_format format);
 int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer);
+size_t	print_base(t_format format, va_list *app, t_buffer *buffer);
 size_t	print_char(t_format format, va_list *app, t_buffer *buffer);
 size_t	print_integer(t_format format, va_list *app, t_buffer *buffer);
 void	print_itoa_base(uintmax_t nb, int8_t base, t_format format,
