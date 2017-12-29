@@ -1,6 +1,8 @@
 .clang-format
 .vscode
 *.code-workspace
+printf
 /build/
+/obj/
 /lib/build/
 /lib/libft.a
