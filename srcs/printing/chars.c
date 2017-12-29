@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:35:48 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:52:12 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 22:19:34 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	print_char(t_format format, va_list *app, t_buffer *buffer)
 	size_t	width;
 	int		printed_char;
 
-	width = (format.width - 1 > 0) ? format.width - 1 : 1;
+	width = (format.width > 0) ? format.width - 1: 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
 	if (format.flags & UNICODE)
