@@ -6,69 +6,63 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:07:28 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 20:33:06 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 21:50:00 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-static void	buffer_4bytes(uint32_t wchar)
+static void	buffer_4bytes(wchar_t wchar, t_buffer *buffer)
 {
-		uint8_t	tmp;
+		uint8_t	tmp[4];
 
-		tmp = ((wchar >> 18) & 0x07) | 0xF0;
-		buffered_print(&tmp, 1);
-		tmp = ((wchar >> 12) & 0x3F) | 0x80;
-		buffered_print(&tmp, 1);
-		tmp = ((wchar >> 6) & 0x3F) | 0x80;
-		buffered_print(&tmp, 1);
-		tmp = (wchar & 0x3F) | 0x80;
-		buffered_print(&tmp, 1);
+		tmp[0] = ((wchar >> 18) & 0x07) | 0xF0;
+		tmp[1] = ((wchar >> 12) & 0x3F) | 0x80;
+		tmp[2] = ((wchar >> 6) & 0x3F) | 0x80;
+		tmp[3] = (wchar & 0x3F) | 0x80;
+		buffered_print(tmp, 4, buffer);
 }
 
-static void	buffer_3bytes(uint32_t wchar)
+static void	buffer_3bytes(wchar_t wchar, t_buffer *buffer)
 {
-		uint8_t tmp;
+		uint8_t tmp[3];
 
-		tmp = ((wchar >> 12) & 0x0F) | 0xE0;
-		buffered_print(&tmp, 1);
-		tmp = ((wchar >> 6) & 0x3F) | 0x80;
-		buffered_print(&tmp, 1);
-		tmp = (wchar & 0x3F) | 0x81)0;
-		buffered_print(&tmp, 1);
+		tmp[0] = ((wchar >> 12) & 0x0F) | 0xE0;
+		tmp[1] = ((wchar >> 6) & 0x3F) | 0x80;
+		tmp[2] = (wchar & 0x3F) | 0x81;
+		buffered_print(tmp, 3, buffer);
 }
 
-static void	buffer_2bytes(uint32_t wchar)
+static void	buffer_2bytes(wchar_t wchar, t_buffer *buffer)
 {
-		uint8_t	tmp;
+		uint8_t	tmp[2];
 
-		tmp = ((wchar >> 6) & 0x1F) | 0xC0;
-		buffered_print(&tmp, 1);
-		tmp = (wchar & 0x3F) | 0x80;
-		buffered_print(&tmp, 1);
+		tmp[0] = ((wchar >> 6) & 0x1F) | 0xC0;
+		tmp[1] = (wchar & 0x3F) | 0x80;
+		buffered_print(tmp, 2, buffer);
 }
 
-void		buffer_wchar(uint32_t c)
+void		buffer_wchar(wchar_t wchar, t_buffer *buffer)
 {
-	if ((MB_CUR_MAX >= 2) && (c >= 0x80))
+	if (wchar >= 0x80)
 	{
 		if (wchar >= 0x10000)
-			buffer_4bytes(c);
+			buffer_4bytes(wchar, buffer);
 		else if (wchar >= 0x800)
-			buffer_3bytes(c);
+			buffer_3bytes(wchar, buffer);
 		else if (wchar >= 0x80)
-			buffer_2bytes(c);
+			buffer_2bytes(wchar, buffer);
 	}
 	else
-		buffered_print(&c, 1);
+		buffered_print(&wchar, 1, buffer);
 }
 
-void	buffer_wstring(uint32_t *str, size_t len)
+void	buffer_wstring(wchar_t *wstr, size_t len, t_buffer *buffer)
 {
 	while (len)
 	{
-		buffer_char(*str);
-		++str;
+		buffer_wchar(*wstr, buffer);
+		++wstr;
 		--len;
 	}
 }

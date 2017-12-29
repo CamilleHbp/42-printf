@@ -6,36 +6,50 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 23:45:59 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 21:47:16 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printing.h"
 
-size_t	print_string(t_format format, va_list *app)
+size_t	print_string(t_format format, va_list *app, t_buffer *buffer)
 {
-	char	*str;
-	size_t	len;
-	size_t	width;
+	char		*str;
+	wchar_t		*wstr;
+	intmax_t	len;
+	size_t		width;
 
 	if (format.flags & UNICODE)
-		return (print_wstr(format, app));
-	str = va_arg(*args, char*);
-	if (str == NULL)
-		return (0);
-	if (format.flags & UNICODE)
-		len = (format.flags & PRECISION) ? format.precision : ft_wstrlen(str);
+		wstr = va_arg(*app, wchar_t*);
 	else
-		len = (format.flags & PRECISION) ? format.precision : ft_strlen(str);
-	width = (format.width - len > 0) ? format.width - len : len;
-	if (!(format.flags & RIGHT_PAD)
-		padd_value((format.flags & ZERO_PAD) ? '0' : ' ', width);
+		str = va_arg(*app, char*);
+	len = 0;
 	if (format.flags & UNICODE)
-		buffer_wstring(str, len);
+	{
+		while (wstr[len] != L'\0')
+			++len;
+	ft_putstr("wlen: ");
+	ft_putnbr(len);
+	ft_putchar('\n');
+		len = (format.flags & PRECISION) ? ft_min(format.precision, len) : len;
+	}
 	else
-		buffered_print(str, len);
+		len = (format.flags & PRECISION) ? ft_min(format.precision, ft_strlen(str)) : (intmax_t)ft_strlen(str);
+	ft_putstr("len: ");
+	ft_putnbr(len);
+	ft_putchar('\n');
+	ft_putstr("precision: ");
+	ft_putnbr(format.precision);
+	ft_putchar('\n');
+	width = (format.width - len > 0) ? format.width - len : 0;
+	if (!(format.flags & RIGHT_PAD))
+		padd_value(" ", width, buffer);
+	if (format.flags & UNICODE)
+		buffer_wstring(wstr, len, buffer);
+	else
+		buffered_print(str, len, buffer);
 	if (format.flags & RIGHT_PAD)
-		padd_value(' ', width);
+		padd_value(" ", width, buffer);
 	return ((format.width > len) ? format.width : len);
 }

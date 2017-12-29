@@ -6,26 +6,26 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/27 00:20:47 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:25:17 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
 
-int32_t		print_arg(t_format format, va_list *app)
+int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 {
-	if ((format.specifier == 'd') || (format.specifier == 'i'))
-		;
-		// print_integer(format, *app);
+	if ((format.specifier == 'd') || (format.specifier == 'i')
+		|| (format.specifier == 'D') || (format.specifier == 'i'))
+		print_integer(format, app, buffer);
 	// else if (format.specifier == "f")
 		// print_float(format, app);
 	// else if (format.specifier == "oubx")
 		// print_base(format, app);
-	else if (format.specifier == 'c')
-		print_char(format, app);
-	else if (format.specifier == 's')
-		print_string(format, app);
+	else if ((format.specifier == 'c') || (format.specifier == 'C'))
+		print_char(format, app, buffer);
+	else if ((format.specifier == 's') || (format.specifier == 'S'))
+		print_string(format, app, buffer);
 	// else if (format.specifier == "p")
 		// print_pointer(format, app);
 	// else if (format.specifier == "n")
@@ -44,30 +44,29 @@ int32_t		print_arg(t_format format, va_list *app)
 ** 2- As long as the buffer has space, we store it in.
 */
 
-size_t		buffered_print(void *void_data, size_t size)
+size_t		buffered_print(void *void_data, size_t size, t_buffer *buf)
 {
-	static char		buffer[X64_SIZE] __attribute__((__aligned__(8)));
-	static size_t	buffer_index;
 	size_t			char_written;
 	uint32_t		leftover;
 	uint8_t			*data;
 	int64_t			i;
 
 	data = (uint8_t*)void_data;
-	leftover = X64_SIZE - buffer_index;
-	while (size > leftover)
+	i = 0;
+	char_written = 0;
+	while (size > (X64_SIZE - buf->buffer_index))
 	{
-		leftover = X64_SIZE - buffer_index;
-		ft_memcpy(&(buffer[buffer_index]), &(data[i]), leftover);
+		leftover = X64_SIZE - buf->buffer_index;
+		ft_memcpy(&(buf->buffer[buf->buffer_index]), &(data[i]), leftover);
 		size -= leftover;
 		i += leftover;
-		buffer_index += leftover;
+		buf->buffer_index += leftover;
 		char_written += leftover;
-		write(1, buffer, buffer_index);
-		buffer_index = 0;
+		write(1, buf->buffer, buf->buffer_index);
+		buf->buffer_index = 0;
 	}
-	ft_memcpy(&(buffer[buffer_index]), &(data[i]), size);
-	buffer_index += size;
+	ft_memcpy(&(buf->buffer[buf->buffer_index]), &(data[i]), size);
+	buf->buffer_index += size;
 	char_written += size;
 	return (char_written);
 }

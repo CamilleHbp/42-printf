@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 13:11:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 19:57:59 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:25:15 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void	print_test(t_format format)
 	print_flags(format);
 	ft_putstr("width: ");
 	ft_putnbr(format.width);
-	ft_putstr("\nprecision: ");
+	ft_putchar('\n');
+	ft_putstr("precision: ");
 	ft_putnbr(format.precision);
+	ft_putchar('\n');
 	print_length(format);
 	ft_putstr("specifier: ");
 	ft_putchar(format.specifier);

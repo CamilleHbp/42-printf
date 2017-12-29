@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/19 19:26:36 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:22:30 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,14 @@
 ** letter in lowercase.
 */
 
-static void	set_upper_flag(char c, t_format *format)
+static void	set_upper_flag(char *c, t_format *format)
 {
-	if (ft_strchr("DUO", c) != NULL)
-		format->flags &= LONG;
-	if (ft_strchr("XFEGA", c) != NULL)
-		format->flags &= UPPERCASE;
-	if (ft_strchr("CS", c) != NULL)
-		format->flags &= UNICODE;
-	c += 32;
+	if (ft_strchr("DUO", *c) != NULL)
+		format->flags |= LONG;
+	if (ft_strchr("XFEGA", *c) != NULL)
+		format->flags |= UPPERCASE;
+	if (ft_strchr("CS", *c) != NULL)
+		format->flags |= UNICODE;
 }
 
 char	*get_specifier(char *string, t_format *format)
@@ -76,7 +75,7 @@ char	*get_specifier(char *string, t_format *format)
 		if (ft_strchr(specifier, *traverse) != NULL)
 		{
 			if (ft_isupper(*traverse))
-				set_upper_flag(*traverse, format);
+				set_upper_flag(traverse, format);
 			format->specifier = *traverse;
 			return (NULL);
 		}

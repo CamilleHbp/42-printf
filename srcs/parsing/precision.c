@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 23:18:25 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 21:25:51 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 
 	if (**string != '.')
 		return (FAILURE);
-	format->flags &= PRECISION;
+	format->flags |= PRECISION;
 	*string += 1;
 	if (**string == '*')
 	{

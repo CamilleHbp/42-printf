@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/27 23:09:34 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:06:42 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static intmax_t	return_integer(t_format format, va_list *app)
 	else if (format.flags & SHORT)
 		cast = (short)va_arg(*app, int);
 	else if (format.flags & LONG)
-		cast = (long)va_arg(*app, int);
+		cast = (long)va_arg(*app, long);
 	else if (format.flags & LLONG)
 		cast = (long long)va_arg(*app, int);
 	else if (format.flags & INTMAX)
@@ -35,9 +35,13 @@ static intmax_t	return_integer(t_format format, va_list *app)
 	return (cast);
 }
 
-size_t	print_integer(t_format format, va_list *app)
+size_t	print_integer(t_format format, va_list *app, t_buffer *buffer)
 {
+	intmax_t number;
 
+	number = return_integer(format, app);
+	print_number(number, 10, "", format, buffer);
+	return (format.width);
 }
 
 /* void	print_itoa(intmax_t n, t_format format)

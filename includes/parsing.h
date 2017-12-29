@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:13 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/26 18:30:59 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:26:58 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FORMAT_PARSING_H
 
 # include "ft_printf.h"
-#include "utils.h"
+# include "printing.h"
+# include "utils.h"
 
 /*
 ** The following flags are used thourought the code and stored in an int32.
@@ -44,21 +45,8 @@
 # define PRECISION	(1 << 16)
 # define POINTER	(1 << 17)
 
-/*
-** This little macro does not execute code. It is simply here to remember that
-** by ANDing with the complement of the flag, I actually unset the flag.
-*/
-
-typedef struct	s_format
-{
-	uint32_t	flags;
-	int32_t		width;
-	int32_t		precision;
-	char		specifier;
-}				t_format;
-
 char			*get_specifier(char *string, t_format *format);
-char			*parse_format(char *str, va_list *app);
+char			*parse_format(char *str, va_list *app, t_buffer *buffer);
 int32_t			seek_flag(char **string, t_format *format);
 int32_t			seek_length(char **string, t_format *format);
 int32_t			seek_precision(char **string, t_format *format, va_list *app);

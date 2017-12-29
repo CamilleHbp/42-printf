@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:52:30 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/29 12:29:12 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 
 	if (**string == '*')
 	{
-		format->width = (int32_t)va_arg(*app, int);
-		if (format->width < 0)
+		format->width = (uint32_t)va_arg(*app, int);
+		/* if (format->width < 0)
 		{
 			format->flags &= RIGHT_PAD;
 			format->width = -(format->width);
-		}
+		}*/
 		*string += 1;
 		return (SUCCESS);
 	}
