@@ -6,7 +6,7 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2017/12/29 12:38:08 by cbaillat         ###   ########.fr        #
+#    Updated: 2017/12/29 22:24:54 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS	+=	$(SRC_DIR)/parsing/flags.c \
 			$(SRC_DIR)/parsing/specifiers.c \
 			$(SRC_DIR)/parsing/width.c
 SRCS	+=	$(SRC_DIR)/printing/printing.c \
-			$(SRC_DIR)/printing/chars.c \
 			$(SRC_DIR)/printing/nums_common.c \
 			$(SRC_DIR)/printing/nums_integers.c \
 			$(SRC_DIR)/printing/strings_unicode.c \
