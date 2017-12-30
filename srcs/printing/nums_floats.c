@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 17:59:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/30 23:23:42 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/30 23:25:51 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_float(long double nb, uint8_t base, t_format format,
 	{
 		print_itoa_base(ft_absl(integer), base, format, buffer);
 		buffered_print(".", 1, buffer);
-		print_decimal(ft_abs_float(decimal), base, format, buffer);
+		print_decimal(ft_absd(decimal), base, format, buffer);
 	}
 	// We print the necessary 0 padding for the decimal part
 	leftover = format.precision - get_decimal_len(decimal);
