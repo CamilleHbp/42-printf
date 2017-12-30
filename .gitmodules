@@ -7,3 +7,6 @@
 [submodule "roblabla"]
 	path = roblabla
 	url = https://github.com/roblabla42/ft_printf.git
+[submodule "luccasim"]
+	path = luccasim
+	url = https://github.com/luccasim/ft_printf.git
