@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 23:08:30 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/30 23:25:32 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 	// We print the necessary 0 padding
 	leftover = format.precision - nb_len;
 	padd_value("0", leftover, buffer);
-	print_itoa_base(ft_absolute(nb), base, format, buffer);
+	print_itoa_base(ft_absl(nb), base, format, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", format.width, buffer);
 }
