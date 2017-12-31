@@ -5,51 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 17:59:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/30 23:25:51 by cbaillat         ###   ########.fr       */
+/*   Created: 2017/12/31 11:54:03 by cbaillat          #+#    #+#             */
+/*   Updated: 2017/12/31 11:54:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-void	print_float(long double nb, uint8_t base, t_format format,
-			t_buffer *buffer)
+static long double	return_float(t_format format, va_list *app)
 {
-	uintmax_t	integer;
-	long double decimal;
-	size_t	deci_len;
-	size_t	leftover;
+	long double	cast;
 
-	// We get the integer and decimal part and calculate the decimal len for the precision
-	integer = (uintmax_t)nb;
-	decimal = nb - integer;
-	// If no precision is specified, it is 6
-	if (!(format.flags & PRECISION))
-		format.precision = 6;
-	// first we need to calculate the total width needed
-	if ((nb < 0) || (format.flags & SIGN) || (format.flags & SPACE))
-		format.width -= 1;
-	// If the format precision is not 0, we need to subtract 1 more for the '.'
-	format.width -= get_nb_len(integer, base)
-					+ (format.precision == 0) ? 0 : format.precision + 1;
-	// If we need to right justify, and pad with spaces, we do before the prefix
-	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))
-		padd_value(" ", format.width, buffer);
-	// If we need to right justify, and pad with 0, we do that after the prefix
-	else if (!(format.flags & RIGHT_PAD) && (format.flags & ZERO_PAD))
-		padd_value("0", format.width, buffer);
-	// We print the integer part then the point, then the decimal part
-	if (format.precision == 0)
-		print_itoa_base(ft_absl(ft_round(nb)), base, format, buffer);
+	if (format.flags & LDOUBLE)
+		cast = (long double)va_arg(*app, long double);
 	else
-	{
-		print_itoa_base(ft_absl(integer), base, format, buffer);
-		buffered_print(".", 1, buffer);
-		print_decimal(ft_absd(decimal), base, format, buffer);
-	}
-	// We print the necessary 0 padding for the decimal part
-	leftover = format.precision - get_decimal_len(decimal);
-	padd_value("0", leftover, buffer);
-	if (format.flags & RIGHT_PAD)
-		padd_value(" ", format.width, buffer);
+		cast = (double)va_arg(*app, double);
+	return (cast);
+}
+
+size_t	print_floats(t_format format, va_list *app, t_buffer *buffer)
+{
+	long double number;
+
+	number = return_float(format, app);
+	if (format.specifier == 'f' || format.specifier == 'F')
+		print_float_number(number, 10, format, buffer);
+	/* else if (format.specifier == 'e' || format.specifier == 'E')
+		print_float_scientific(number, 10, "", format, buffer);
+	else if (format.specifier == 'g' || format.specifier == 'G')
+		print_float_shorter(number, 10, "0", format, buffer);
+	else if (format.specifier == 'a')
+		print_float_scientific(number, 16, "0x", format, buffer);
+	else if (format.specifier == 'A')
+		print_float_scientific(number, 16, "0X", format, buffer) */;
+	return (format.width);
 }

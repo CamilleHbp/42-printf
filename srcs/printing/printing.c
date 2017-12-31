@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 22:44:14 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/31 11:49:37 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 {
 	if (ft_strchr("dDi", format.specifier) != NULL)
 		print_integer(format, app, buffer);
-	// else if (format.specifier == "f")
-		// print_float(format, app);
+	if (ft_strchr("aAeEfFgG", format.specifier) != NULL)
+		print_floats(format, app, buffer);
 	else if (ft_strchr("oOuUbBxX", format.specifier) != NULL)
 		print_base(format, app, buffer);
 	else if ((format.specifier == 'c') || (format.specifier == 'C'))
