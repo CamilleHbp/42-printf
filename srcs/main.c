@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 19:54:39 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:00:05 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	int		arg7 = 010;
 	int		width = 20;
 	int		arg8 = 0xF;
-	double	arg9 = -10;
+	long double	arg9 = -10;
 	double	arg10 = 0.7;
 	int		them = 0;
 	int		me = 0;
@@ -39,8 +39,8 @@ int	main(void)
 		wchar:   |%12C|\n \
 		octal:   |%#10o|\n \
 		hexa:    |%#0*X|\n \
-		double:  |%#020f|\n \
-		scient:  |%.e|\n \
+		double:  |%#020Lf|\n \
+		scient:  |%.Le|\n \
 		hexscien:|%0.A|\n \
 		ptr:     |%p|\n \
 		written: |%n|\n\n", \
@@ -53,8 +53,8 @@ int	main(void)
 		wchar:   |%12C|\n \
 		octal:   |%#10o|\n \
 		hexa:    |%#0*X|\n \
-		double:  |%#020f|\n \
-		scient:  |%.e|\n \
+		double:  |%#020Lf|\n \
+		scient:  |%.Le|\n \
 		hexscien:|%0.A|\n \
 		ptr:     |%p|\n \
 		written: |%n|\n\n", \
