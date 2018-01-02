@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 17:49:44 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:52:25 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 	int		arg6 = 0b1010;
 	int		arg7 = 010;
 	int		arg8 = 0xF;
-	double	arg9 = -0.1212;
+	double	arg9 = -0;
 
 	setlocale(LC_ALL, "en_US.utf8");
 	printf   ("Them: \n \

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:23:59 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 17:50:28 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:55:12 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ static void	print_decimal(long double nb, uint8_t base, t_format format,
 	while (format.precision > 0)
 	{
 		nb *= base;
+		if (nb == 0)
+			buffered_print("0", 1 , buffer);
 		format.precision--;
 	}
-	print_itoa_base(ft_round(nb), base, format, buffer);
+	if (nb != 0)
+		print_itoa_base(ft_round(nb), base, format, buffer);
 }
 
 static void	print_exponent(int64_t exponent, uint8_t base, t_format format,
@@ -40,7 +43,7 @@ static void	print_exponent(int64_t exponent, uint8_t base, t_format format,
 		else
 			buffered_print("e", 1, buffer);
 	}
-	if (exponent > 0)
+	if (exponent >= 0)
 		buffered_print("+", 1 , buffer);
 	else
 		buffered_print("-", 1 , buffer);
