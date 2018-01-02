@@ -15,9 +15,9 @@ NAME := printf
 #directories
 SRCS_DIR	:=	./srcs
 INC_DIR		:=	./includes \
-				./libft/includes
+				./libftprintf/includes
 OBJ_DIR		:=	./obj
-LIB_DIR		:=	./libft
+LIB_DIR		:=	./libftprintf
 
 
 
@@ -49,11 +49,11 @@ DEPS_FLAGS = -MD -MP
 
 # # compiler and flags
 CC		:= gcc
-CFLAGS	:= -ggdb -Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror
 IFLAGS += $(foreach d, $(INC_DIR), -I$d)
 
 # # libraries
-LIBS		:= ft
+LIBS		:= ftprintf
 LIB_FLAGS	:= -L$(LIB_DIR) -l$(LIBS)
 
 # echo output colours
