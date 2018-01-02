@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:54:03 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 11:54:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:20:45 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ size_t	print_floats(t_format format, va_list *app, t_buffer *buffer)
 	number = return_float(format, app);
 	if (format.specifier == 'f' || format.specifier == 'F')
 		print_float_number(number, 10, format, buffer);
-	/* else if (format.specifier == 'e' || format.specifier == 'E')
+	 else if (format.specifier == 'e' || format.specifier == 'E')
 		print_float_scientific(number, 10, "", format, buffer);
-	else if (format.specifier == 'g' || format.specifier == 'G')
+	/*else if (format.specifier == 'g' || format.specifier == 'G')
 		print_float_shorter(number, 10, "0", format, buffer);
 	else if (format.specifier == 'a')
 		print_float_scientific(number, 16, "0x", format, buffer);
