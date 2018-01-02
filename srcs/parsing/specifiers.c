@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 20:22:30 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 23:41:24 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char	*get_specifier(char *string, t_format *format)
 	traverse = string;
 	while (42)
 	{
-		if (*traverse == '\0' || *traverse == ' ')
+		// if (*traverse == '\0' || *traverse == ' ')
+		if (*traverse == '\0')
 		{
 			ft_putnstr(string, (traverse - string));
 			return (traverse);

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 19:43:56 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 21:33:11 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	print_pointer(t_format *format, va_list *app, t_buffer *buffer);
 void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 			t_buffer *buffer);
 void	print_string(t_format format, va_list *app, t_buffer *buffer);
+void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
+			t_buffer *buffer);
 
 #endif

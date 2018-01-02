@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 15:12:01 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 23:57:35 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,35 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 	leftover = format.precision - nb_len;
 	padd_value("0", leftover, buffer);
 	print_itoa_base(ft_absl(nb), base, format, buffer);
+	if (format.flags & RIGHT_PAD)
+		padd_value(" ", format.width, buffer);
+}
+
+void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
+			t_buffer *buffer)
+{
+	size_t	nb_len;
+	size_t	leftover;
+
+	// first we need to calculate the total width needed
+	if ((format.flags & SIGN) || (format.flags & SPACE))
+		format.width -= 1;
+	nb_len = get_nb_len(nb, base);
+	format.width -= (format.flags & PREFIX) ? ft_strlen(prefix) : 0;
+	format.width -= ft_max(format.precision, nb_len);
+	// If we need to right justify, and pad with spaces, we do before the prefix
+	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))
+		padd_value(" ", format.width, buffer);
+	print_prefix(nb, base, prefix, format, buffer);
+	// If we need to right justify, and pad with 0, we do that after the prefix
+	if (!(format.flags & RIGHT_PAD) && (format.flags & ZERO_PAD))
+		padd_value("0", format.width, buffer);
+	// We print the necessary 0 padding
+	leftover = format.precision - nb_len;
+	padd_value("0", leftover, buffer);
+	// if the number is 0 and we have a precision of 0, we only need to pad
+	if (!(nb == 0 && format.precision == 0))
+		print_itoa_base(nb, base, format, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", format.width, buffer);
 }
