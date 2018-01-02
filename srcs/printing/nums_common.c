@@ -6,19 +6,12 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 12:20:59 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/31 15:12:01 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
-
-void	print_decimal(long double nb, uint8_t base, t_format format,
-			t_buffer *buffer)
-{
-	while (format.precision-- > 0)
-		nb *= base;
-	print_itoa_base(ft_round(nb), base, format, buffer);
-}
+#include <stdio.h>
 
 void	print_itoa_base(uintmax_t nb, int8_t base, t_format format,
 			t_buffer *buffer)

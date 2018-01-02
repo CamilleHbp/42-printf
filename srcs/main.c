@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 12:36:03 by cbaillat         ###   ########.fr       */
+/*   Updated: 2017/12/31 15:49:21 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 		wchar:   |%12C|\n \
 		octal:   |%#10o|\n \
 		hexa:    |%#040X|\n \
-		double:  |%010f|\n\n", \
+		double:  |%05.0f|\n\n", \
 			arg1, arg2, arg3, arg4, arg5, arg7, arg8, arg9);
 	ft_printf   ("Me  : \n \
 		string:  |%-10.2s|\n \
@@ -46,6 +46,6 @@ int	main(void)
 		binary:  |%#-10b|\n \
 		octal:   |%#10o|\n \
 		hexa:    |%#040X|\n \
-		double:  |%010f|\n\n", \
+		double:  |%05.0f|\n\n", \
 			arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }
