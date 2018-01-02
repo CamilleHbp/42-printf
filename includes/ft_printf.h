@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:22:50 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 18:12:48 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ typedef struct	s_format
 
 typedef struct	s_buffer
 {
-	char	buffer[X64_SIZE] __attribute__((__aligned__(8)));
-	size_t	buffer_index;
+	char		buffer[X64_SIZE] __attribute__((__aligned__(8)));
+	size_t		buffer_index;
+	uintmax_t	bytes_written;
 }				t_buffer;
 
 int	ft_printf(const char *format, ...);

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 11:18:13 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 19:56:22 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 		}
 	}
 	else
-	{
-		if (ft_strchr("aAeEfFgG", format->specifier) != NULL)
-			format->precision = 6;
-		else
-			format->precision = 0;
-	}
+		format->precision = 0;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 11:49:37 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 19:45:32 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 		print_char(format, app, buffer);
 	else if ((format.specifier == 's') || (format.specifier == 'S'))
 		print_string(format, app, buffer);
-	// else if (format.specifier == "p")
-		// print_pointer(format, app);
-	// else if (format.specifier == "n")
-		// return_written_char(format, app);
+	else if (format.specifier == 'p')
+		 print_pointer(&format, app, buffer);
+	else if (format.specifier == 'n')
+		*va_arg(*app, int *) = buffer->bytes_written;
 	return (FAILURE);
 }
 
@@ -43,16 +43,14 @@ int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 ** 2- As long as the buffer has space, we store it in.
 */
 
-size_t		buffered_print(void *void_data, size_t size, t_buffer *buf)
+void		buffered_print(void *void_data, size_t size, t_buffer *buf)
 {
-	size_t			char_written;
 	uint32_t		leftover;
 	uint8_t			*data;
 	int64_t			i;
 
 	data = (uint8_t*)void_data;
 	i = 0;
-	char_written = 0;
 	while (size > (X64_SIZE - buf->buffer_index))
 	{
 		leftover = X64_SIZE - buf->buffer_index;
@@ -60,12 +58,11 @@ size_t		buffered_print(void *void_data, size_t size, t_buffer *buf)
 		size -= leftover;
 		i += leftover;
 		buf->buffer_index += leftover;
-		char_written += leftover;
+		buf->bytes_written += leftover;
 		write(1, buf->buffer, buf->buffer_index);
 		buf->buffer_index = 0;
 	}
 	ft_memcpy(&(buf->buffer[buf->buffer_index]), &(data[i]), size);
 	buf->buffer_index += size;
-	char_written += size;
-	return (char_written);
+	buf->bytes_written += size;
 }

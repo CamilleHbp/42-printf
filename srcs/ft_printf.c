@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:46:29 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 13:48:22 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/02 18:14:37 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	init_buffer(t_buffer *buffer)
 	buffer->buffer_index = 0;
 	while (i-- >= 0)
 		buffer->buffer[i] = 0;
+	buffer->bytes_written = 0;
 }
 
 int			ft_printf(const char *format, ...)

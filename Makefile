@@ -6,7 +6,7 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2017/12/31 11:50:04 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/02 19:44:29 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS	+=	$(SRC_DIR)/printing/printing.c \
 			$(SRC_DIR)/printing/nums_common_floats.c \
 			$(SRC_DIR)/printing/nums_floats.c \
 			$(SRC_DIR)/printing/nums_integers.c \
+			$(SRC_DIR)/printing/pointers.c \
 			$(SRC_DIR)/printing/strings_unicode.c \
 			$(SRC_DIR)/printing/strings.c
 SRCS	+=	$(SRC_DIR)/test/print_test.c
