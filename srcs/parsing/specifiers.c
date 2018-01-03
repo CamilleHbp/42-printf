@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 23:41:24 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/03 21:02:11 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,31 @@ static void	set_upper_flag(char *c, t_format *format)
 		format->flags |= UNICODE;
 }
 
-char	*get_specifier(char *string, t_format *format)
+static char	*undefined_behaviour(char *string, va_list *app, t_buffer *buffer)
 {
-	char		*traverse;
-	char		*specifier;
+	char	*formatting;
+
+	formatting = "-+ #.*0hijlLtz";
+	if (ft_strchr(formatting, *string) == NULL && !ft_isdigit(*string))
+	{
+		buffered_print("% ", 0, buffer);
+		va_arg(*app, int);
+		buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
+		return (string + 1);
+	}
+	return (string);
+}
+
+char	*get_specifier(char *string, t_format *format, va_list *app,
+			t_buffer *buffer)
+{
+	char	*traverse;
+	char	*specifier;
 
 	specifier = "dDiuUboOxXfFeEgGaAcCsSpn%";
 	traverse = string;
-	while (42)
+	while (*traverse != '\0')
 	{
-		// if (*traverse == '\0' || *traverse == ' ')
-		if (*traverse == '\0')
-		{
-			ft_putnstr(string, (traverse - string));
-			return (traverse);
-		}
 		if (ft_strchr(specifier, *traverse) != NULL)
 		{
 			if (ft_isupper(*traverse))
@@ -80,6 +90,9 @@ char	*get_specifier(char *string, t_format *format)
 			format->specifier = *traverse;
 			return (NULL);
 		}
+		else
+			traverse = undefined_behaviour(traverse, app, buffer);
 		++traverse;
 	}
+	return (traverse);
 }

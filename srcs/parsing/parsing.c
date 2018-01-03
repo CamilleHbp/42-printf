@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:36:54 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 17:24:40 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/03 19:29:54 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*parse_format(char *str, va_list *app, t_buffer *buffer)
 	t_format format;
 
 	init_format(&format);
-	ret = get_specifier(str, &format);
+	ret = get_specifier(str, &format, app, buffer);
 	if (ret != NULL)
 		return (ret);
 	while (*str != format.specifier)

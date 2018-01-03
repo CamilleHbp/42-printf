@@ -6,7 +6,7 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/03 18:56:09 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/03 19:17:25 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS	+=	utils_common.c
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
 VPATH	+= ./libftprintf/srcs/math:./libftprintf/srcs/memory:./libftprintf/srcs/lists:./libftprintf/srcs/string
-SRCS 	:=	ft_abs.c \
+SRCS 	+=	ft_abs.c \
 			ft_absd.c \
 			ft_absl.c \
 			ft_absld.c \
@@ -124,12 +124,11 @@ SRCS	+=	ft_atoi.c \
 OBJ_DIR		:=	./obj
 OBJECTS		:= $(patsubst %,$(OBJ_DIR)/%,$(SRCS:.c=.o))
 # objects dependencies
-DEPS		= $(OBJECTS:.o:.d)
-DEPS_FLAGS	= -MD -MP
+# DEPS		= $(OBJECTS:.o:.d)
+# DEPS_FLAGS	= -MD -MP
 
 # includes
-INC_DIR	:=	./includes \
-				./libftprintf/includes
+INC_DIR	:=	./includes
 IFLAGS	+= $(foreach d, $(INC_DIR), -I$d)
 
 # echo output colours
@@ -149,7 +148,7 @@ $(NAME): $(OBJECTS)
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(DEPS_FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(IFLAGS)  -o $@ -c $<
 
 clean:
 	@echo "[Cleaning ${PURPLE}lib${NC} objects]"
