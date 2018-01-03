@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 00:01:57 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:20:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,15 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 	{
 		format->precision = ft_atoi(*string);
 		digits = format->precision;
+		if (digits == 0)
+			*string += 1;
 		while (digits > 0)
 		{
 			*string += 1;
 			digits /= 10;
 		}
+		if (format->precision < 0)
+			format->flags &= ~PRECISION;
 	}
 	else
 		format->precision = 0;

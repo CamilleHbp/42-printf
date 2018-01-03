@@ -4,5 +4,5 @@
 printf
 /build/
 /obj/
-/lib/build/
-/lib/libft.a
+/libftprintf/obj/
+libftprintf.a

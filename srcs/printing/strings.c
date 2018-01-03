@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 23:58:30 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:46:14 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,19 @@ void	print_string(t_format format, va_list *app, t_buffer *buffer)
 	if (format.flags & UNICODE)
 	{
 		if ((wstr = va_arg(*app, wchar_t*)) == NULL)
+		{
 			buffered_print("(null)", 6, buffer);
+			return ;
+		}
 	}
 	else
+	{
 		if ((str = va_arg(*app, char*)) == NULL)
+		{
 			buffered_print("(null)", 6, buffer);
+			return ;
+		}
+	}
 	len = 0;
 	if (format.flags & UNICODE)
 		len = (format.flags & PRECISION) ?
