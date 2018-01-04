@@ -6,17 +6,17 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 23:17:03 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 13:47:29 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 11:13:59 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-uint64_t	ft_absl(int64_t nb)
+uintmax_t	ft_absl(intmax_t nb)
 {
-   int64_t mask;
+   intmax_t mask;
 
-   mask = (nb >> (sizeof(int64_t) * CHAR_BIT - 1));
-   nb = (uint64_t)((nb + mask) ^ mask);
+   mask = (nb >> (sizeof(nb) * CHAR_BIT - 1));
+   nb = (uintmax_t)((nb + mask) ^ mask);
    return (nb);
 }
