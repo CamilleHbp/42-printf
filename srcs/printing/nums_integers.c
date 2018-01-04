@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 22:33:43 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 15:35:42 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ size_t	print_integer(t_format format, va_list *app, t_buffer *buffer)
 	intmax_t number;
 
 	number = return_integer(format, app);
-	print_number(number, 10, "", format, buffer);
+	print_signed(number, 10, "", format, buffer);
 	return (format.width);
 }

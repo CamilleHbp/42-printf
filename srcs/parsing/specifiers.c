@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 21:02:11 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:03:41 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@
 
 static void	set_upper_flag(char *c, t_format *format)
 {
-	if (ft_strchr("DUO", *c) != NULL)
+	if (ft_strchr("DUOCS", *c) != NULL)
 		format->flags |= LONG;
 	if (ft_strchr("XFEGA", *c) != NULL)
 		format->flags |= UPPERCASE;
-	if (ft_strchr("CS", *c) != NULL)
-		format->flags |= UNICODE;
 }
 
 static char	*undefined_behaviour(char *string, va_list *app, t_buffer *buffer)

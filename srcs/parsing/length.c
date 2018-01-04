@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:30 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 09:00:29 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 16:10:27 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	set_flag_long(t_format *format)
 {
 	if (format->flags & LONG)
 		format->flags |= LLONG;
-	format->flags |= LLONG;
+	format->flags |= LONG;
 }
 
 static void	set_flag_short(t_format *format)

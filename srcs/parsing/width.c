@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 09:43:30 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:52:19 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ static char	*set_width(char *string, t_format *format)
 {
 	uint32_t	digits;
 
-	format->width = ft_atoi(string);
+	if ((format->width = ft_atoi(string)) < 0)
+	{
+		format->width = ft_abs(format->width);
+		format->flags |= RIGHT_PAD;
+	}
 	digits = format->width;
 	while (digits > 0)
 	{
@@ -48,7 +52,11 @@ int32_t	seek_width(char **string, t_format *format, va_list *app)
 {
 	if (**string == '*')
 	{
-		format->width = (uint32_t)va_arg(*app, int);
+		if ((format->width = (int32_t)va_arg(*app, int)) < 0)
+		{
+			format->width = ft_abs(format->width);
+			format->flags |= RIGHT_PAD;
+		}
 		*string += 1;
 		return (SUCCESS);
 	}

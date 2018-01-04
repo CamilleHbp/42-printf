@@ -6,26 +6,57 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 14:37:16 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 18:49:28 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printing.h"
 
+static void	print_null(int32_t precision, t_buffer *buffer)
+{
+	if (precision > 0)
+		buffered_print("(null)", 6, buffer);
+}
+
+static int32_t get_print_len(char *str, wchar_t *wstr, t_format format)
+{
+	intmax_t	len;
+	intmax_t	strlen;
+
+	if (format.flags & LONG)
+	{
+		strlen = ft_wstrlen(wstr);
+		len = (format.flags & PRECISION) ?
+				ft_min(format.precision, strlen) : strlen;
+		len = (len < strlen) ? strlen : len;
+	}
+	else
+	{
+		strlen = ft_strlen(str);
+		len = (format.flags & PRECISION) ?
+				ft_min(format.precision, strlen) : strlen;
+		len = (len < strlen) ? strlen : len;
+	}
+	return (len);
+}
+
 void	print_char(t_format format, va_list *app, t_buffer *buffer)
 {
 	size_t	width;
 	wchar_t	c;
 
-	if (format.flags & UNICODE)
+	if (format.flags & LONG)
 		c = va_arg(*app, wchar_t);
 	else
 		c = (wchar_t)va_arg(*app, int);
 	width = (format.width > 0) ? format.width - ft_wcharlen(c): 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
-	buffer_wchar(c, buffer);
+	if (format.flags & LONG)
+		buffer_wchar(c, buffer);
+	else
+		buffered_print(&c, 1, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
 }
@@ -37,33 +68,21 @@ void	print_string(t_format format, va_list *app, t_buffer *buffer)
 	intmax_t	len;
 	size_t		width;
 
-	if (format.flags & UNICODE)
+	str = "";
+	wstr = L"";
+	if (format.flags & LONG)
 	{
 		if ((wstr = va_arg(*app, wchar_t*)) == NULL)
-		{
-			buffered_print("(null)", 6, buffer);
-			return ;
-		}
+			return (print_null(format.precision, buffer));
 	}
 	else
-	{
 		if ((str = va_arg(*app, char*)) == NULL)
-		{
-			buffered_print("(null)", 6, buffer);
-			return ;
-		}
-	}
-	len = 0;
-	if (format.flags & UNICODE)
-		len = (format.flags & PRECISION) ?
-		ft_min(format.precision, ft_wstrlen(wstr)) : (intmax_t)ft_wstrlen(wstr);
-	else
-		len = (format.flags & PRECISION) ?
-		ft_min(format.precision, ft_strlen(str)) : (intmax_t)ft_strlen(str);
+			return (print_null(format.precision, buffer));
+	len = get_print_len(str, wstr, format);
 	width = (format.width - len > 0) ? format.width - len : 0;
 	if (!(format.flags & RIGHT_PAD))
-		padd_value(" ", width, buffer);
-	if (format.flags & UNICODE)
+		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
+	if (format.flags & LONG)
 		buffer_wstring(wstr, len, buffer);
 	else
 		buffered_print(str, len, buffer);

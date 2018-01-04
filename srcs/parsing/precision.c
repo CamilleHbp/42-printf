@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 09:26:43 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 17:50:24 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ static char	*set_precision(char *string, t_format *format)
 
 int32_t		seek_precision(char **string, t_format *format, va_list *app)
 {
-
 	if (**string != '.')
 		return (FAILURE);
 	format->flags |= PRECISION;
-	format->flags &= ~ZERO_PAD;
 	*string += 1;
 	if (**string == '*')
 	{
-		format->precision = (int32_t)va_arg(*app, int);
+		if ((format->precision = (int32_t)va_arg(*app, int)) < 0)
+			format->flags &= ~PRECISION;
 		*string += 1;
 	}
 	else if (ft_isdigit(**string))
