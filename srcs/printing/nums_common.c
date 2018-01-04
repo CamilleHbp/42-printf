@@ -6,49 +6,15 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 14:30:46 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 10:42:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 #include <stdio.h>
 
-void	print_itoa_base(uintmax_t nb, int8_t base, t_format format,
-			t_buffer *buffer)
-{
-	uintmax_t	tmp;
-	size_t		len;
-	char		*print;
-	char		nb_str[ITOA];
-
-	len = 1;
-	tmp = ITOA;
-	while (tmp-- > 0)
-		nb_str[tmp] = 0;
-	tmp = nb;
-	while ((tmp /= base) > 0)
-		++len;
-	if (format.flags & UPPERCASE)
-		print = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	else
-		print = "0123456789abcdefghijklmnopqrstuvwxyz";
-	if ((nb == 0) && ((format.flags & PRECISION) && (format.precision == 0)))
-		nb_str[0] = '\0';
-	else if (nb == 0)
-		nb_str[0] = '0';
-	else
-	{
-		while (len--)
-		{
-			nb_str[len] = print[(nb % base)];
-			nb /= base;
-		}
-	}
-	buffered_print(nb_str, ft_strlen(nb_str), buffer);
- }
-
 static void	print_prefix(intmax_t nb, uint8_t base, char *prefix,
-					t_format format, t_buffer *buffer)
+				t_format format, t_buffer *buffer)
 {
 	if (base == 10)
 	{

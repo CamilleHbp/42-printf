@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:30 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/29 21:26:27 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:00:29 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,21 @@
 ** L  |						long double
 */
 
-int32_t	seek_length(char **string, t_format *format)
+static void	set_flag_long(t_format *format)
+{
+	if (format->flags & LONG)
+		format->flags |= LLONG;
+	format->flags |= LLONG;
+}
+
+static void	set_flag_short(t_format *format)
+{
+	if (format->flags & SHORT)
+		format->flags |= SSHORT;
+	format->flags |= SHORT;
+}
+
+int32_t		seek_length(char **string, t_format *format)
 {
 	char	*length;
 	char	*found;
@@ -36,17 +50,9 @@ int32_t	seek_length(char **string, t_format *format)
 	if ((found = ft_strchr(length, **string)) != NULL)
 	{
 		if (**string == 'h')
-		{
-			if (format->flags & SHORT)
-				format->flags |= SSHORT;
-			format->flags |= SHORT;
-		}
+			set_flag_short(format);
 		else if (**string == 'l')
-		{
-			if (format->flags & LONG)
-				format->flags |= LLONG;
-			format->flags |= LLONG;
-		}
+			set_flag_long(format);
 		else if (**string == 'j')
 			format->flags |= INTMAX;
 		else if (**string == 'z')

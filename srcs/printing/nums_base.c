@@ -6,13 +6,13 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 22:26:27 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 21:32:52 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:52:33 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-static uintmax_t	return_unsigned(t_format format, va_list *app)
+static uintmax_t	return_arg_unsigned(t_format format, va_list *app)
 {
 	uintmax_t	cast;
 
@@ -37,9 +37,9 @@ static uintmax_t	return_unsigned(t_format format, va_list *app)
 
 size_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 {
-	uintmax_t number;
+	uintmax_t	number;
 
-	number = return_unsigned(format, app);
+	number = return_arg_unsigned(format, app);
 	if (format.specifier == 'u' || format.specifier == 'U')
 		print_unsigned(number, 10, "", format, buffer);
 	else if (format.specifier == 'o' || format.specifier == 'O')

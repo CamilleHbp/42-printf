@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 21:33:11 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:44:58 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer);
 size_t	print_base(t_format format, va_list *app, t_buffer *buffer);
 void	print_char(t_format format, va_list *app, t_buffer *buffer);
 size_t	print_integer(t_format format, va_list *app, t_buffer *buffer);
-void	print_itoa_base(uintmax_t nb, int8_t base, t_format format,
-			t_buffer *buffer);
 size_t	print_floats(t_format format, va_list *app, t_buffer *buffer);
 void	print_float_number(long double nb, uint8_t base, t_format format,
 			t_buffer *buffer);

@@ -6,7 +6,7 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/03 19:17:25 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/04 10:30:24 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,10 @@ SRCS	+=	printing.c \
 			pointers.c \
 			strings_unicode.c \
 			strings.c
-SRCS	+=	utils_common.c
+SRCS	+=	get_nb_len.c \
+			padd_value.c \
+			print_itoa_base.c \
+			utils_floats.c
 # libft sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories

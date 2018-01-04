@@ -6,14 +6,13 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 21:20:19 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:48:32 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-
-int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer)
 {
 	if (ft_strchr("dDi", format.specifier) != NULL)
 		print_integer(format, app, buffer);
@@ -26,7 +25,7 @@ int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 	else if ((format.specifier == 's') || (format.specifier == 'S'))
 		print_string(format, app, buffer);
 	else if (format.specifier == 'p')
-		 print_pointer(&format, app, buffer);
+		print_pointer(&format, app, buffer);
 	else if (format.specifier == 'n')
 		*va_arg(*app, int *) = buffer->bytes_written;
 	else if (format.specifier == '%')
@@ -45,13 +44,13 @@ int32_t		print_arg(t_format format, va_list *app, t_buffer *buffer)
 ** 2- As long as the buffer has space, we store it in.
 */
 
-void		buffered_print(void *void_data, size_t size, t_buffer *buf)
+void	buffered_print(void *void_data, size_t size, t_buffer *buf)
 {
-	uint32_t		leftover;
-	uint8_t			*data;
-	int64_t			i;
+	uint32_t	leftover;
+	uint8_t		*data;
+	int64_t		i;
 
-	data = (uint8_t*)void_data;
+	data = (uint8_t *)void_data;
 	i = 0;
 	while (size > (X64_SIZE - buf->buffer_index))
 	{

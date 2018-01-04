@@ -6,14 +6,14 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:36:54 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 19:29:54 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:01:10 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "printing.h"
 
-static void init_format(t_format *format)
+static void	init_format(t_format *format)
 {
 	format->flags = 0;
 	format->width = 0;
@@ -26,10 +26,10 @@ static void init_format(t_format *format)
 ** already been printed.
 */
 
-char	*parse_format(char *str, va_list *app, t_buffer *buffer)
+char		*parse_format(char *str, va_list *app, t_buffer *buffer)
 {
-	char *   ret;
-	t_format format;
+	char		*ret;
+	t_format	format;
 
 	init_format(&format);
 	ret = get_specifier(str, &format, app, buffer);
@@ -43,7 +43,6 @@ char	*parse_format(char *str, va_list *app, t_buffer *buffer)
 		seek_precision(&str, &format, app);
 		seek_length(&str, &format);
 	}
-	// print_test(format);
 	print_arg(format, app, buffer);
 	return (++str);
 }

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 13:20:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 09:26:43 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,26 @@
 ** If we find nothing,  0 is assumed.
 */
 
-int32_t	seek_precision(char **string, t_format *format, va_list *app)
+static char	*set_precision(char *string, t_format *format)
 {
 	uint32_t	digits;
+
+	format->precision = ft_atoi(string);
+	digits = format->precision;
+	if (digits == 0)
+		++string;
+	while (digits > 0)
+	{
+		digits /= 10;
+		++string;
+	}
+	if (format->precision < 0)
+		format->flags &= ~PRECISION;
+	return (string);
+}
+
+int32_t		seek_precision(char **string, t_format *format, va_list *app)
+{
 
 	if (**string != '.')
 		return (FAILURE);
@@ -55,19 +72,7 @@ int32_t	seek_precision(char **string, t_format *format, va_list *app)
 		*string += 1;
 	}
 	else if (ft_isdigit(**string))
-	{
-		format->precision = ft_atoi(*string);
-		digits = format->precision;
-		if (digits == 0)
-			*string += 1;
-		while (digits > 0)
-		{
-			*string += 1;
-			digits /= 10;
-		}
-		if (format->precision < 0)
-			format->flags &= ~PRECISION;
-	}
+		*string = set_precision(*string, format);
 	else
 		format->precision = 0;
 	return (SUCCESS);
