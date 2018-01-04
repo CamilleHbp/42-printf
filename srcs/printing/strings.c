@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 12:46:14 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 14:37:16 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	print_char(t_format format, va_list *app, t_buffer *buffer)
 	width = (format.width > 0) ? format.width - ft_wcharlen(c): 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
-	// if (format.flags & UNICODE)
-		buffer_wchar(c, buffer);
-	// else
-		// buffered_print(c, 1, buffer);
+	buffer_wchar(c, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
 }

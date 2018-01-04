@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 09:48:32 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 14:39:18 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer)
 	else if (format.specifier == 'n')
 		*va_arg(*app, int *) = buffer->bytes_written;
 	else if (format.specifier == '%')
-		buffered_print("%", 1, buffer);
+		print_percent(format, buffer);
 	return (FAILURE);
 }
 

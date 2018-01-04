@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:22 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 11:23:46 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 14:27:29 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int32_t calculate_width(uintmax_t nb, int8_t sign, uint8_t base,
 void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 			t_buffer *buffer)
 {
-	size_t	nb_len;
 	size_t	leftover;
 
 	// first we need to calculate the total width needed
@@ -65,7 +64,7 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 	if (!(format.flags & RIGHT_PAD) && (format.flags & ZERO_PAD))
 		padd_value("0", format.width, buffer);
 	// We print the necessary 0 padding
-	leftover = format.precision - nb_len;
+	leftover = format.precision - get_nb_len(nb, base);
 	padd_value("0", leftover, buffer);
 	print_itoa_base(ft_absl(nb), base, format, buffer);
 	if (format.flags & RIGHT_PAD)
@@ -75,7 +74,6 @@ void	print_number(intmax_t nb, uint8_t base, char *prefix, t_format format,
 void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
 			t_buffer *buffer)
 {
-	size_t	nb_len;
 	size_t	leftover;
 
 	// first we need to calculate the total width needed

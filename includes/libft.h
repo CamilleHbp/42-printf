@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:33:34 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 14:38:16 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/04 14:28:11 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				ft_wputstr(wchar_t *ws);
 size_t				ft_wstrlen(wchar_t *ws);
 uint32_t			ft_abs(int32_t nb);
 double				ft_absd(double x);
-uint64_t			ft_absl(int64_t nb);
+uintmax_t			ft_absl(intmax_t nb);
 long double			ft_absld(long double x);
 float				ft_absf(float x);
 uintmax_t			ft_absolute(intmax_t n);
