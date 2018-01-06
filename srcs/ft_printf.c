@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:46:29 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 20:25:22 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:36:22 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,18 @@ static void	init_buffer(t_buffer *buffer)
 int			ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	char		*tmp;
+	char		*str;
 	t_buffer	buffer;
 
-	tmp = (char *)format;
+	str = (char *)format;
 	init_buffer(&buffer);
 	va_start(ap, format);
-	while (*tmp != '\0')
+	while (*str != '\0')
 	{
-		if (*tmp == '%')
-			tmp = parse_format(tmp + 1, &ap, &buffer);
+		if (*str == '%')
+			str = parse_format(str + 1, &ap, &buffer);
 		else
-		{
-			buffered_print(tmp, 1, &buffer);
-			++tmp;
-		}
+			buffered_print(str++, 1, &buffer);
 	}
 	write(1, buffer.buffer, buffer.buffer_index);
 	va_end(ap);

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/03 20:25:10 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:30:33 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define MALLOC_FAIL			(int32_t)-2
 
 # define X64_SIZE	(size_t)64
+
+typedef struct	s_functions
+{
+	int			(*ptrfunc)(t_format, va_list*, t_buffer*);
+	char		specifier;
+}				t_functions;
 
 typedef struct	s_format
 {

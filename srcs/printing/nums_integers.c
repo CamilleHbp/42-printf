@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:33:14 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 15:35:42 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 14:02:10 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ static intmax_t	return_integer(t_format format, va_list *app)
 {
 	intmax_t	cast;
 
-	if (format.flags & SSHORT)
-		cast = (char)va_arg(*app, int);
-	else if (format.flags & SHORT)
-		cast = (short)va_arg(*app, int);
-	else if (format.flags & LONG)
-		cast = (long)va_arg(*app, long);
-	else if (format.flags & LLONG)
-		cast = (long long)va_arg(*app, long long);
-	else if (format.flags & INTMAX)
-		cast = (intmax_t)va_arg(*app, intmax_t);
+	if (format.flags & PTRDIFF)
+		cast = (ptrdiff_t)va_arg(*app, ptrdiff_t);
 	else if (format.flags & SIZE_T)
 		cast = (size_t)va_arg(*app, size_t);
-	else if (format.flags & PTRDIFF)
-		cast = (ptrdiff_t)va_arg(*app, ptrdiff_t);
+	else if (format.flags & INTMAX)
+		cast = (intmax_t)va_arg(*app, intmax_t);
+	else if (format.flags & LLONG)
+		cast = (long long)va_arg(*app, long long);
+	else if (format.flags & LONG)
+		cast = (long)va_arg(*app, long);
+	else if (format.flags & SHORT)
+		cast = (short)va_arg(*app, int);
+	else if (format.flags & SSHORT)
+		cast = (char)va_arg(*app, int);
 	else
 		cast = (int)va_arg(*app, int);
 	return (cast);

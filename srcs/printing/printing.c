@@ -6,31 +6,67 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 14:39:18 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:50:14 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
+static t_functions	g_functions[] =
+{
+	{print_percent, '%'},
+	{print_signed, 'd'},
+	{print_signed, 'i'},
+	{print_unsigned, 'x'},
+	{print_unsigned, 'X'},
+	{print_unsigned, 'o'},
+	{print_unsigned, 'u'},
+	{print_bytes, 'n'},
+	{print_string, 's'},
+	{print_char, 'c'},
+	{print_pointer, 'p'},
+	{print_floats, 'f'},
+	{print_floats, 'e'},
+	{print_unsigned, 'b'},
+	{NULL, FAILURE}
+};
+
+static int	print_function(t_format format, va_list *app,
+				t_buffer *buffer)
+{
+	int32_t	i;
+
+	i = 0;
+	while (g_functions[i].specifier != FAILURE)
+	{
+		if (g_functions[i].specifier == format.specifier)
+			return (g_functions[i].ptrfunc(format, app, buffer));
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static int32_t	*undefined_behaviour(t_format format, t_buffer *buffer)
+{
+	int32_t	width;
+
+	if (!format.specifier)
+		return (FAILURE);
+	width = (format.width > 0) ? format.width - 1: 0;
+	if (!(format.flags & RIGHT_PAD))
+		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
+	buffered_print(&(format.specifier), 1, buffer);
+	if (format.flags & RIGHT_PAD)
+		padd_value(" ", width, buffer);
+	buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
+	return (FAILURE);
+}
+
 int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer)
 {
-	if (ft_strchr("dDi", format.specifier) != NULL)
-		print_integer(format, app, buffer);
-	if (ft_strchr("aAeEfFgG", format.specifier) != NULL)
-		print_floats(format, app, buffer);
-	else if (ft_strchr("oOuUbBxX", format.specifier) != NULL)
-		print_base(format, app, buffer);
-	else if ((format.specifier == 'c') || (format.specifier == 'C'))
-		print_char(format, app, buffer);
-	else if ((format.specifier == 's') || (format.specifier == 'S'))
-		print_string(format, app, buffer);
-	else if (format.specifier == 'p')
-		print_pointer(&format, app, buffer);
-	else if (format.specifier == 'n')
-		*va_arg(*app, int *) = buffer->bytes_written;
-	else if (format.specifier == '%')
-		print_percent(format, buffer);
-	return (FAILURE);
+	if (print_function(format, app, buffer) == FAILURE)
+		return (undefined_behaviour(format, buffer));
+	return (SUCCESS);
 }
 
 /*
@@ -67,3 +103,19 @@ void	buffered_print(void *void_data, size_t size, t_buffer *buf)
 	buf->buffer_index += size;
 	buf->bytes_written += size;
 }
+
+/* static char	*undefined_behaviour(char *string, va_list *app, t_buffer
+*buffer)
+{
+	char	*formatting;
+
+	formatting = "-+ #.*0hijlLtz";
+	if (ft_strchr(formatting, *string) == NULL && !ft_isdigit(*string))
+	{
+		buffered_print("% ", 0, buffer);
+		va_arg(*app, int);
+		buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
+		return (string + 1);
+	}
+	return (string);
+}*/

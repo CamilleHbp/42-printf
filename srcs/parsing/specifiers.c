@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 16:03:41 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:47:57 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,47 +50,18 @@
 
 static void	set_upper_flag(char *c, t_format *format)
 {
-	if (ft_strchr("DUOCS", *c) != NULL)
+	if (ft_strchr("DCOSU", *c) != NULL)
 		format->flags |= LONG;
-	if (ft_strchr("XFEGA", *c) != NULL)
+	if (ft_strchr("ABFEGX", *c) != NULL)
 		format->flags |= UPPERCASE;
+	*c += 32;
 }
 
-static char	*undefined_behaviour(char *string, va_list *app, t_buffer *buffer)
-{
-	char	*formatting;
-
-	formatting = "-+ #.*0hijlLtz";
-	if (ft_strchr(formatting, *string) == NULL && !ft_isdigit(*string))
-	{
-		buffered_print("% ", 0, buffer);
-		va_arg(*app, int);
-		buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
-		return (string + 1);
-	}
-	return (string);
-}
-
-char	*get_specifier(char *string, t_format *format, va_list *app,
+void	get_specifier(char **string, t_format *format, va_list *app,
 			t_buffer *buffer)
 {
-	char	*traverse;
-	char	*specifier;
-
-	specifier = "dDiuUboOxXfFeEgGaAcCsSpn%";
-	traverse = string;
-	while (*traverse != '\0')
-	{
-		if (ft_strchr(specifier, *traverse) != NULL)
-		{
-			if (ft_isupper(*traverse))
-				set_upper_flag(traverse, format);
-			format->specifier = *traverse;
-			return (NULL);
-		}
-		else
-			traverse = undefined_behaviour(traverse, app, buffer);
-		++traverse;
-	}
-	return (traverse);
+	if (ft_isupper(**string))
+		set_upper_flag(*string, format);
+	format->specifier = **string;
+	*string += 1;
 }

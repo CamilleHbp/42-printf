@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 22:26:27 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 09:52:33 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/05 14:02:53 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ static uintmax_t	return_arg_unsigned(t_format format, va_list *app)
 {
 	uintmax_t	cast;
 
-	if (format.flags & SSHORT)
-		cast = (unsigned char)va_arg(*app, unsigned int);
-	else if (format.flags & SHORT)
-		cast = (unsigned short)va_arg(*app, unsigned int);
-	else if (format.flags & LONG)
-		cast = va_arg(*app, unsigned long);
-	else if (format.flags & LLONG)
-		cast = va_arg(*app, unsigned long long);
-	else if (format.flags & INTMAX)
-		cast = va_arg(*app, uintmax_t);
+	if (format.flags & PTRDIFF)
+		cast = va_arg(*app, ptrdiff_t);
 	else if (format.flags & SIZE_T)
 		cast = va_arg(*app, size_t);
-	else if (format.flags & PTRDIFF)
-		cast = va_arg(*app, ptrdiff_t);
+	else if (format.flags & INTMAX)
+		cast = va_arg(*app, uintmax_t);
+	else if (format.flags & LLONG)
+		cast = va_arg(*app, unsigned long long);
+	else if (format.flags & LONG)
+		cast = va_arg(*app, unsigned long);
+	else if (format.flags & SHORT)
+		cast = (unsigned short)va_arg(*app, unsigned int);
+	else if (format.flags & SSHORT)
+		cast = (unsigned char)va_arg(*app, unsigned int);
 	else
 		cast = va_arg(*app, unsigned int);
 	return (cast);
