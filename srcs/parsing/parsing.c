@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:36:54 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 13:35:28 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 15:27:13 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	init_format(t_format *format)
 	format->flags = 0;
 	format->width = 0;
 	format->precision = 1;
+	format->to_print = 0;
 	format->specifier = '\0';
 }
 
@@ -28,7 +29,6 @@ static void	init_format(t_format *format)
 
 char		*parse_format(char *str, va_list *app, t_buffer *buffer)
 {
-	char		*ret;
 	t_format	format;
 
 	init_format(&format);
@@ -44,7 +44,7 @@ char		*parse_format(char *str, va_list *app, t_buffer *buffer)
 			continue ;
 		break ;
 	}
-	get_specifier(&str, &format, app, buffer);
+	get_specifier(&str, &format);
 	print_arg(format, app, buffer);
 	return (str);
 }

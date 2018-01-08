@@ -6,17 +6,18 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 18:49:28 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 13:48:05 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printing.h"
 
-static void	print_null(int32_t precision, t_buffer *buffer)
+static int32_t	print_null(int32_t precision, t_buffer *buffer)
 {
 	if (precision > 0)
 		buffered_print("(null)", 6, buffer);
+	return (SUCCESS);
 }
 
 static int32_t get_print_len(char *str, wchar_t *wstr, t_format format)
@@ -36,12 +37,12 @@ static int32_t get_print_len(char *str, wchar_t *wstr, t_format format)
 		strlen = ft_strlen(str);
 		len = (format.flags & PRECISION) ?
 				ft_min(format.precision, strlen) : strlen;
-		len = (len < strlen) ? strlen : len;
+		len = (len < strlen) ? len : strlen;
 	}
 	return (len);
 }
 
-void	print_char(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_char(t_format format, va_list *app, t_buffer *buffer)
 {
 	size_t	width;
 	wchar_t	c;
@@ -59,9 +60,10 @@ void	print_char(t_format format, va_list *app, t_buffer *buffer)
 		buffered_print(&c, 1, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
+	return (SUCCESS);
 }
 
-void	print_string(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_string(t_format format, va_list *app, t_buffer *buffer)
 {
 	char		*str;
 	wchar_t		*wstr;
@@ -88,4 +90,5 @@ void	print_string(t_format format, va_list *app, t_buffer *buffer)
 		buffered_print(str, len, buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
+	return (SUCCESS);
 }

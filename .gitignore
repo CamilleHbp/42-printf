@@ -1,5 +1,6 @@
 .clang-format
 .vscode
+*.dSYM/
 *.code-workspace
 printf
 /build/

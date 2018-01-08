@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 13:47:57 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 14:50:09 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,26 @@
 static void	set_upper_flag(char *c, t_format *format)
 {
 	if (ft_strchr("DCOSU", *c) != NULL)
+	{
 		format->flags |= LONG;
-	if (ft_strchr("ABFEGX", *c) != NULL)
+		format->specifier = *c + 32;
+	}
+	else if (ft_strchr("ABFEGX", *c) != NULL)
+	{
 		format->flags |= UPPERCASE;
-	*c += 32;
+		format->specifier = *c + 32;
+	}
+	else
+		format->specifier = *c;
 }
 
-void	get_specifier(char **string, t_format *format, va_list *app,
-			t_buffer *buffer)
+void	get_specifier(char **string, t_format *format)
 {
+	if (!**string)
+		return ;
 	if (ft_isupper(**string))
 		set_upper_flag(*string, format);
-	format->specifier = **string;
+	else
+		format->specifier = **string;
 	*string += 1;
 }

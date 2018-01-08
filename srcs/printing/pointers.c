@@ -6,13 +6,13 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 19:23:54 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 13:05:15 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 12:19:32 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-void	print_pointer(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_pointer(t_format format, va_list *app, t_buffer *buffer)
 {
 	void	*ptr;
 
@@ -20,4 +20,5 @@ void	print_pointer(t_format format, va_list *app, t_buffer *buffer)
 	format.flags |= POINTER;
 	format.flags |= PREFIX;
 	print_unsigned((uintmax_t)ptr, 16, "0x", format, buffer);
+	return (SUCCESS);
 }

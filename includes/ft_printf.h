@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 13:30:33 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 15:25:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,12 @@
 
 # define X64_SIZE	(size_t)64
 
-typedef struct	s_functions
-{
-	int			(*ptrfunc)(t_format, va_list*, t_buffer*);
-	char		specifier;
-}				t_functions;
-
 typedef struct	s_format
 {
 	uint32_t	flags;
 	int32_t		width;
 	int32_t		precision;
+	int32_t		to_print;
 	char		specifier;
 }				t_format;
 
@@ -48,6 +43,12 @@ typedef struct	s_buffer
 	uintmax_t	bytes_written;
 	int8_t		undefined_behaviour;
 }				t_buffer;
+
+typedef struct	s_functions
+{
+	int32_t		(*ptrfunc)(t_format, va_list*, t_buffer*);
+	char		specifier;
+}				t_functions;
 
 int	ft_printf(const char *format, ...);
 

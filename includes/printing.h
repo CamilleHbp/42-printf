@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 15:35:52 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 16:42:45 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ void	buffered_print(void *data, size_t size, t_buffer *buffer);
 void	buffer_wchar(wchar_t wchar, t_buffer *buffer);
 void	buffer_wstring(wchar_t *wstr, size_t len, t_buffer *buffer);
 int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer);
-size_t	print_base(t_format format, va_list *app, t_buffer *buffer);
-void	print_char(t_format format, va_list *app, t_buffer *buffer);
-size_t	print_integer(t_format format, va_list *app, t_buffer *buffer);
-size_t	print_floats(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_base(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_bytes(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_char(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_integer(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_floats(t_format format, va_list *app, t_buffer *buffer);
 void	print_float_number(long double nb, uint8_t base, t_format format,
 			t_buffer *buffer);
 void	print_float_scientific(long double nb, uint8_t base, char *prefix,
 			t_format format, t_buffer *buffer);
-void	print_signed(intmax_t nb, uint8_t base, char *prefix, t_format format,
-			t_buffer *buffer);
-void	print_percent(t_format format, t_buffer *buffer);
-void	print_pointer(t_format *format, va_list *app, t_buffer *buffer);
-void	print_string(t_format format, va_list *app, t_buffer *buffer);
+void	print_signed(intmax_t nb, t_format format, t_buffer *buffer);
+int32_t	print_percent(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_pointer(t_format format, va_list *app, t_buffer *buffer);
+int32_t	print_string(t_format format, va_list *app, t_buffer *buffer);
 void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
 			t_buffer *buffer);
 

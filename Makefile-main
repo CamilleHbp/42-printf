@@ -6,14 +6,14 @@
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/04 15:47:10 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/08 14:56:00 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = printf
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Wextra
 
 # sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
@@ -28,6 +28,7 @@ SRCS	+=	flags.c \
 			specifiers.c \
 			width.c
 SRCS	+=	printing.c \
+			bytes_written.c \
 			nums_base.c \
 			nums_common.c \
 			nums_common_floats.c \

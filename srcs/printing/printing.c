@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 13:50:14 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 15:10:12 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 static t_functions	g_functions[] =
 {
 	{print_percent, '%'},
-	{print_signed, 'd'},
-	{print_signed, 'i'},
-	{print_unsigned, 'x'},
-	{print_unsigned, 'X'},
-	{print_unsigned, 'o'},
-	{print_unsigned, 'u'},
+	{print_integer, 'd'},
+	{print_integer, 'i'},
+	{print_base, 'x'},
+	{print_base, 'X'},
+	{print_base, 'o'},
+	{print_base, 'u'},
 	{print_bytes, 'n'},
 	{print_string, 's'},
 	{print_char, 'c'},
 	{print_pointer, 'p'},
 	{print_floats, 'f'},
 	{print_floats, 'e'},
-	{print_unsigned, 'b'},
+	{print_base, 'b'},
 	{NULL, FAILURE}
 };
 
@@ -43,22 +43,25 @@ static int	print_function(t_format format, va_list *app,
 			return (g_functions[i].ptrfunc(format, app, buffer));
 		i++;
 	}
-	return (SUCCESS);
+	return (FAILURE);
 }
 
-static int32_t	*undefined_behaviour(t_format format, t_buffer *buffer)
+static int32_t	undefined_behaviour(t_format format, t_buffer *buffer)
 {
 	int32_t	width;
+	char	undefined_char[2];
 
 	if (!format.specifier)
 		return (FAILURE);
 	width = (format.width > 0) ? format.width - 1: 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
-	buffered_print(&(format.specifier), 1, buffer);
+	undefined_char[1] = '\0';
+	undefined_char[0] = format.specifier;
+	buffered_print(undefined_char, ft_strlen(undefined_char), buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
-	buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
+	// buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
 	return (FAILURE);
 }
 

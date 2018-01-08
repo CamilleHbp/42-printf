@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:13 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 16:03:58 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 12:09:11 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@
 # define PRECISION	(1 << 16)
 # define POINTER	(1 << 17)
 
-char	*get_specifier(char *string, t_format *format, va_list *app,
-			t_buffer *buffer);
+void	get_specifier(char **string, t_format *format);
 char	*parse_format(char *str, va_list *app, t_buffer *buffer);
 int32_t	seek_flag(char **string, t_format *format);
 int32_t	seek_length(char **string, t_format *format);

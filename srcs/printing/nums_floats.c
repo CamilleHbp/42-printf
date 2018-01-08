@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:54:03 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/02 17:58:03 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 11:56:19 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static long double	return_float(t_format format, va_list *app)
 	return (cast);
 }
 
-size_t	print_floats(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_floats(t_format format, va_list *app, t_buffer *buffer)
 {
 	long double number;
 
@@ -38,5 +38,5 @@ size_t	print_floats(t_format format, va_list *app, t_buffer *buffer)
 		print_float_scientific(number, 16, "0x", format, buffer);
 	else if (format.specifier == 'A')
 		print_float_scientific(number, 16, "0X", format, buffer);
-	return (format.width);
+	return (SUCCESS);
 }

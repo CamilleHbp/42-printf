@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:30 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 16:10:27 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 15:00:16 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,22 @@ static void	set_flag_long(t_format *format)
 static void	set_flag_short(t_format *format)
 {
 	if (format->flags & SHORT)
+	{
 		format->flags |= SSHORT;
+		format->flags &= ~SHORT;
+		return ;
+	}
 	format->flags |= SHORT;
 }
 
 int32_t		seek_length(char **string, t_format *format)
 {
 	char	*length;
-	char	*found;
 
 	length = "hljztL";
-	if ((found = ft_strchr(length, **string)) != NULL)
+	if (!**string)
+		return (FAILURE);
+	if (ft_strchr(length, **string) != NULL)
 	{
 		if (**string == 'h')
 			set_flag_short(format);

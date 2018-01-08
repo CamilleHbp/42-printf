@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 22:26:27 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 14:02:53 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 12:10:23 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static uintmax_t	return_arg_unsigned(t_format format, va_list *app)
 	return (cast);
 }
 
-size_t	print_base(t_format format, va_list *app, t_buffer *buffer)
+int32_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 {
 	uintmax_t	number;
 
@@ -52,5 +52,5 @@ size_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 		print_unsigned(number, 2, "0b", format, buffer);
 	else if (format.specifier == 'B')
 		print_unsigned(number, 2, "0B", format, buffer);
-	return (format.width);
+	return (SUCCESS);
 }

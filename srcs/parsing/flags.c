@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/05 12:54:55 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 14:53:40 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@
 int32_t		seek_flag(char **string, t_format *format)
 {
 	char	*flag;
-	char	*found;
 
 	flag = "-+ #0";
-	// if (**string == '0' && ft_isdigit(*(*string - 1)))
-		// return (FAILURE);
-	if ((found = ft_strchr(flag, **string)) != NULL)
+	if (!**string)
+		return (FAILURE);
+	if (ft_strchr(flag, **string) != NULL)
 	{
 		if (**string == '#')
 			format->flags |= PREFIX;

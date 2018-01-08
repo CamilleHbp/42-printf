@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile.bak                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/04 14:41:02 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/08 13:10:17 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = printf
 
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
@@ -18,7 +18,7 @@ CFLAGS	= -Wall -Werror -Wextra
 # sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
-VPATH	:= ./srcs:./srcs/parsing:./srcs/printing:./srcs/utilities
+VPATH	:= ./:./srcs:./srcs/parsing:./srcs/printing:./srcs/utilities
 SRCS	:=	ft_printf.c
 SRCS	+=	flags.c \
 			parsing.c \
@@ -27,6 +27,7 @@ SRCS	+=	flags.c \
 			specifiers.c \
 			width.c
 SRCS	+=	printing.c \
+			bytes_written.c \
 			nums_base.c \
 			nums_common.c \
 			nums_common_floats.c \
