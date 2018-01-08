@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:23:59 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 10:32:56 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:37:26 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	print_float_number(long double nb, uint8_t base, t_format format,
 {
 	uint64_t	integer;
 	long double	fraction;
+	char		nb_str[ITOA];
 
 	integer = ft_absld(nb);
 	fraction = ft_absld(nb) - integer;
@@ -92,10 +93,14 @@ void	print_float_number(long double nb, uint8_t base, t_format format,
 	format.width = calculate_width(nb, integer, base, "", format);
 	print_sign(nb, "", format, buffer);
 	if (format.precision == 0)
-		print_itoa_base(ft_absl(ft_round(nb)), base, format, buffer);
+	{
+		print_itoa_base(ft_absl(ft_round(nb)), base, format, nb_str);
+		buffered_print(nb_str, get_nb_len(ft_absl(nb), base), buffer);
+	}
 	else
 	{
-		print_itoa_base(integer, base, format, buffer);
+		print_itoa_base(integer, base, format, nb_str);
+		buffered_print(nb_str, get_nb_len(integer, base), buffer);
 		if (fraction != 0 || format.flags & PREFIX)
 		{
 			buffered_print(".", 1, buffer);
@@ -121,6 +126,7 @@ void	print_float_scientific(long double nb, uint8_t base, char *prefix,
 	uint64_t	integer;
 	int64_t		exponent;
 	long double fraction;
+	char		nb_str[ITOA];
 
 	return_scient_parts(&integer, &fraction, &exponent, base, ft_absld(nb));
 	if (!(format.flags & PRECISION))
@@ -128,10 +134,14 @@ void	print_float_scientific(long double nb, uint8_t base, char *prefix,
 	format.width = calculate_width(nb, integer, base, prefix, format);
 	print_sign(nb, prefix, format, buffer);
 	if (format.precision == 0)
-		print_itoa_base(ft_round(integer + fraction), base, format, buffer);
+	{
+		print_itoa_base(ft_round(integer + fraction), base, format, nb_str);
+		buffered_print(nb_str, get_nb_len(ft_absl(nb), base), buffer);
+	}
 	else
 	{
-		print_itoa_base(integer, base, format, buffer);
+		print_itoa_base(integer, base, format, nb_str);
+		buffered_print(nb_str, get_nb_len(integer, base), buffer);
 		buffered_print(".", 1, buffer);
 		print_fraction(fraction, base, format, buffer);
 	}

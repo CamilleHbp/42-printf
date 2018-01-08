@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 16:42:45 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:26:25 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define NB_STR_MAX (size_t)21
 # define PAD_RIGHT	(uint8_t)1
 # define PAD_LEFT	(uint8_t)0
-# define ITOA		(uint8_t)33
 
 # define D_PREFIX		""
 # define B_PREFIX		"0b"

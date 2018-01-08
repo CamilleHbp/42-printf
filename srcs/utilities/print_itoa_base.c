@@ -6,17 +6,16 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 09:34:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 16:56:15 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:26:56 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 void		print_itoa_base(uintmax_t nb, int8_t base, t_format format,
-			t_buffer *buffer)
+			char nb_str[ITOA])
 {
 	int32_t	tmp;
-	char	nb_str[ITOA];
 	char	*print;
 
 	if (format.flags & UPPERCASE)
@@ -28,10 +27,5 @@ void		print_itoa_base(uintmax_t nb, int8_t base, t_format format,
 	{
 		nb_str[tmp] = print[(nb % base)];
 		nb /= base;
-	// DEBUG:
-	ft_putstr("NB STR: ");
-	ft_putchar(nb_str[tmp]);
-	ft_putstr("\n");
 	}
-	buffered_print(nb_str, format.to_print, buffer);
  }

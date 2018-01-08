@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 15:25:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:24:05 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define UNDEFINED_BEHAVIOUR	(int8_t)-1
 # define MALLOC_FAIL			(int32_t)-2
 
+# define ITOA		(uint8_t)33
 # define X64_SIZE	(size_t)64
 
 typedef struct	s_format

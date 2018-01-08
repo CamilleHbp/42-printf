@@ -1,26 +1,25 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile.bak                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/08 14:56:00 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/08 18:42:47 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = printf
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 # sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
 VPATH	:= ./:./srcs:./srcs/parsing:./srcs/printing:./srcs/utilities
 SRCS	:=	ft_printf.c
-SRCS	+=	main-bak.c
 SRCS	+=	flags.c \
 			parsing.c \
 			length.c \
@@ -29,11 +28,10 @@ SRCS	+=	flags.c \
 			width.c
 SRCS	+=	printing.c \
 			bytes_written.c \
-			nums_base.c \
-			nums_common.c \
 			nums_common_floats.c \
 			nums_floats.c \
-			nums_integers.c \
+			nums_signed.c \
+			nums_unsigned.c \
 			percent.c \
 			pointers.c \
 			strings_unicode.c \
@@ -150,7 +148,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@echo "[Building ${PURPLE}library${NC}]"
-	@$(CC) $(CFLAGS) $(OBJECTS) $(IFLAGS) -o $(NAME)
+	@ar rcs $(NAME) $(OBJECTS)
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)

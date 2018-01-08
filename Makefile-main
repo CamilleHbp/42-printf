@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile-main                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/08 14:56:00 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/08 18:42:52 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,10 @@ SRCS	+=	flags.c \
 			width.c
 SRCS	+=	printing.c \
 			bytes_written.c \
-			nums_base.c \
-			nums_common.c \
 			nums_common_floats.c \
 			nums_floats.c \
-			nums_integers.c \
+			nums_signed.c \
+			nums_unsigned.c \
 			percent.c \
 			pointers.c \
 			strings_unicode.c \

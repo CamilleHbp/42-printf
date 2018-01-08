@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 16:55:44 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 14:44:51 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 18:27:31 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ static char	*set_precision(char *string, t_format *format)
 		++string;
 	}
 	if (format->precision < 0)
+	{
+		format->precision = 1;
 		format->flags &= ~PRECISION;
+	}
 	return (string);
 }
 

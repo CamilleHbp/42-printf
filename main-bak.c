@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 16:58:23 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/08 19:28:36 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 {
 	int		ret1;
 	int		ret2;
-
+	int		i = 0;
 	// wchar_t *arg4 = L"ÊM-^ZM-^VÁM-^BM-^I";
 	// wchar_t *arg5 = L"ŸM-^Dÿ≠ŸM-^E ÿÆŸM-^Fÿ≤ŸM-ÿ±";
 
@@ -31,6 +31,21 @@ int	main(void)
 	ret2 = ft_printf("%5.0d\n", 0);
 	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
 
+	ret1 = printf("%3o\n", 0);
+	ret2 = ft_printf("%3o\n", 0);
+	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
+
+	ret1 = printf("%p\n", &i);
+	ret2 = ft_printf("%p\n", &i);
+	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
+
+	ret1 = printf("s: %s, p: %p, d:%d\n", "a string", &i, 42);
+	ret2 = ft_printf("s: %s, p: %p, d:%d\n", "a string", &i, 42);
+	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
+
+	ret1 = printf("{%10.5d}\n", -42);
+	ret2 = ft_printf("{%10.5d}\n", -42);
+	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
 	/* ret1 = printf("%#o\n", 0);
 	ret2 = ft_printf("%#o\n", 0);
 	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
