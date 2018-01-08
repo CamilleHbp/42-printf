@@ -1,5 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   nums_common.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -38,7 +36,7 @@ static int32_t calculate_width(uintmax_t nb, int8_t sign, uint8_t base,
 			char *prefix, t_format format)
 {
 	if ((sign < 0) || (format.flags & SIGN) || (format.flags & SPACE))
-		format.width -= 1;
+		--format.width;
 	format.width -= (format.flags & PREFIX) ? ft_strlen(prefix) : 0;
 	format.width -= ft_max(format.precision, get_nb_len(nb, base));
 	if ((nb == 0) && (format.flags & PRECISION) && (format.precision == 0))
