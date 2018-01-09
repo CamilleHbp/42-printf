@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:01:45 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 14:28:29 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 20:28:18 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	print_signed(intmax_t nb, t_format format, t_buffer *buffer)
 {
 	char	nb_str[ITOA];
 
+	if (format.flags & PRECISION)
+		format.flags &= ~ZERO_PAD;
 	if (format.flags & ZERO_PAD)
 		format.precision = format.width;
 	if ((nb < 0 || format.flags & SIGN || format.flags & SPACE)

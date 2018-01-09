@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 18:12:11 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 17:55:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 20:45:50 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ static void	print_unsigned_prefix(uintmax_t nb, uint8_t base, char *prefix,
 				t_format format, t_buffer *buffer)
 {
 	if ((nb != 0) || (format.flags & POINTER) || base == 8)
-	{
 		if (format.flags & PREFIX)
 			buffered_print(prefix, ft_strlen(prefix), buffer);
-	}
 }
 
-static int32_t unsigned_width(uintmax_t nb, uint8_t base, t_format format)
+static int32_t unsigned_width(uintmax_t nb, uint8_t base, t_format *format)
 {
 	int32_t		to_print;
 	uintmax_t	tmp;
@@ -34,14 +32,14 @@ static int32_t unsigned_width(uintmax_t nb, uint8_t base, t_format format)
 		tmp /= base;
 		++to_print;
 	}
-	if (base == 8 && format.flags & PREFIX)
-		(to_print >= format.precision) ? (format.precision = to_print + 1) : 0;
-	to_print = ft_max(to_print, format.precision);
-	if (base == 8 && format.flags & PREFIX && !nb && format.flags & PRECISION
-			&& format.precision <= 0)
+	if (base == 8 && format->flags & PREFIX)
+		(to_print >= format->precision) ? (format->precision = to_print + 1) : 0;
+	to_print = ft_max(to_print, format->precision);
+	if (base == 8 && format->flags & PREFIX && !nb && format->flags & PRECISION
+			&& format->precision <= 0)
 		++to_print;
-	if (base != 8 && format.flags & PREFIX)
-		format.width -= 2;
+	if (base != 8 && format->flags & PREFIX)
+		format->width -= 2;
 	return (to_print);
 }
 
@@ -55,7 +53,9 @@ void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
 {
 	char	nb_str[ITOA];
 
-	format.to_print = unsigned_width(nb, base, format);
+	if (format.flags & PRECISION)
+		format.flags &= ~ZERO_PAD;
+	format.to_print = unsigned_width(nb, base, &format);
 	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))
 		padd_value(" ", format.width - format.to_print, buffer);
 	print_unsigned_prefix(nb, base, prefix, format, buffer);
@@ -102,13 +102,13 @@ int32_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 		print_unsigned(number, 10, "", format, buffer);
 	else if (format.specifier == 'o' || format.specifier == 'O')
 		print_unsigned(number, 8, "", format, buffer);
+	else if (format.specifier == 'x' && format.flags & UPPERCASE)
+		print_unsigned(number, 16, "0X", format, buffer);
 	else if (format.specifier == 'x')
 		print_unsigned(number, 16, "0x", format, buffer);
-	else if (format.specifier == 'X')
-		print_unsigned(number, 16, "0X", format, buffer);
+	else if (format.specifier == 'b' && format.flags & UPPERCASE)
+		print_unsigned(number, 2, "0B", format, buffer);
 	else if (format.specifier == 'b')
 		print_unsigned(number, 2, "0b", format, buffer);
-	else if (format.specifier == 'B')
-		print_unsigned(number, 2, "0B", format, buffer);
 	return (SUCCESS);
 }
