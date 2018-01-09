@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf
+NAME = libftprintf
 
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra

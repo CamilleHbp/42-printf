@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 14:06:57 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 13:49:35 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 18:00:21 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int	main(void)
 	ret1 = printf("{%#.0e}\n", -4.6);
 	ret2 = ft_printf("{%#.0e}\n", -4.6);
 	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
+
+	//ret1 = printf("%#O\n", 1);
+	ret2 = ft_printf("%#O\n", 1);
+	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);
+
 	/* ret1 = printf("%#o\n", 0);
 	ret2 = ft_printf("%#o\n", 0);
 	printf("Them: %d\nMe:  %d\n\n", ret1, ret2);

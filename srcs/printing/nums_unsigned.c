@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 18:12:11 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 14:18:55 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 17:55:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int32_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 	if (format.specifier == 'u' || format.specifier == 'U')
 		print_unsigned(number, 10, "", format, buffer);
 	else if (format.specifier == 'o' || format.specifier == 'O')
-		print_unsigned(number, 8, "0", format, buffer);
+		print_unsigned(number, 8, "", format, buffer);
 	else if (format.specifier == 'x')
 		print_unsigned(number, 16, "0x", format, buffer);
 	else if (format.specifier == 'X')
