@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 19:24:05 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 14:12:41 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <stdlib.h>
+// DEBUG:
+#include <stdio.h>
 
 # include "libft.h"
 

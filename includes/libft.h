@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:33:34 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/04 14:28:11 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 13:35:39 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ double				ft_abs_float(double x);
 intmax_t			ft_min(intmax_t a, intmax_t b);
 intmax_t			ft_max(intmax_t a, intmax_t b);
 double				ft_pow(int32_t base, int32_t pow);
-uintmax_t			ft_round(long double f);
+intmax_t			ft_round(long double f);
 uint32_t			ft_sqrt(uint32_t nb);
 
 #endif

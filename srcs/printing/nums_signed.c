@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:01:45 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 19:27:54 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/09 14:28:29 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,26 @@ static int32_t signed_width(intmax_t nb, t_format format)
 	return (to_print);
 }
 
-	// first we need to calculate the total width needed
-	// If we need to right justify, and pad with spaces, we do before the prefix
-	// if the number is 0 and we have a precision of 0, we only need to pad
-	// If we need to right justify, and pad with 0, we do that after the prefix
-	// We print the necessary 0 padding
+/*
+**	first we need to calculate the total width needed
+**	If we need to right justify, and pad with spaces, we do before the prefix
+**	if the number is 0 and we have a precision of 0, we only need to pad
+**	If we need to right justify, and pad with 0, we do that after the prefix
+**	We print the necessary 0 padding
+*/
+
 void	print_signed(intmax_t nb, t_format format, t_buffer *buffer)
 {
 	char	nb_str[ITOA];
 
+	if (format.flags & ZERO_PAD)
+		format.precision = format.width;
 	if ((nb < 0 || format.flags & SIGN || format.flags & SPACE)
 			&& format.flags & ZERO_PAD)
 		--format.precision;
 	format.to_print = signed_width(nb, format);
 	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))
 		padd_value(" ", format.width - format.to_print, buffer);
-	if (!(format.flags & RIGHT_PAD) && (format.flags & ZERO_PAD)
-			&& !(format.flags & PRECISION))
-		padd_value("0", format.width - format.to_print, buffer);
 	print_itoa_base(ft_absl(nb), 10, format, nb_str);
 	print_signed_prefix(nb, format, nb_str);
 	buffered_print(nb_str, format.to_print, buffer);
