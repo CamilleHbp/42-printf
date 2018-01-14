@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 15:10:12 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/10 18:10:04 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_functions	g_functions[] =
 	{print_pointer, 'p'},
 	{print_floats, 'f'},
 	{print_floats, 'e'},
+	{print_floats, 'g'},
 	{print_base, 'b'},
 	{NULL, FAILURE}
 };

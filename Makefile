@@ -1,25 +1,26 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile.bak                                       :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/08 18:42:47 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/10 16:06:00 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = printf
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Wextra
 
 # sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
 VPATH	:= ./:./srcs:./srcs/parsing:./srcs/printing:./srcs/utilities
 SRCS	:=	ft_printf.c
+SRCS	+=	main-bak.c
 SRCS	+=	flags.c \
 			parsing.c \
 			length.c \
@@ -28,8 +29,9 @@ SRCS	+=	flags.c \
 			width.c
 SRCS	+=	printing.c \
 			bytes_written.c \
-			nums_common_floats.c \
 			nums_floats.c \
+			nums_floats_common.c \
+			nums_floats_shorter.c \
 			nums_signed.c \
 			nums_unsigned.c \
 			percent.c \
@@ -39,7 +41,8 @@ SRCS	+=	printing.c \
 SRCS	+=	get_nb_len.c \
 			padd_value.c \
 			print_itoa_base.c \
-			utils_floats.c
+			utils_floats.c \
+			utils_floats_scient.c
 # libft sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
@@ -148,7 +151,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@echo "[Building ${PURPLE}library${NC}]"
-	@ar rcs $(NAME) $(OBJECTS)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(IFLAGS) -o $(NAME)
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)

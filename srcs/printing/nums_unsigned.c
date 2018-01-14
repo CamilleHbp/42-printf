@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 18:12:11 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 20:45:50 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/10 09:31:06 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,19 @@ int32_t	print_base(t_format format, va_list *app, t_buffer *buffer)
 	uintmax_t	number;
 
 	number = return_arg_unsigned(format, app);
-	if (format.specifier == 'u' || format.specifier == 'U')
+	if (format.specifier == 'u')
 		print_unsigned(number, 10, "", format, buffer);
-	else if (format.specifier == 'o' || format.specifier == 'O')
+	else if (format.specifier == 'o')
 		print_unsigned(number, 8, "", format, buffer);
-	else if (format.specifier == 'x' && format.flags & UPPERCASE)
-		print_unsigned(number, 16, "0X", format, buffer);
+	else if (format.flags & UPPERCASE)
+	{
+		if (format.specifier == 'x')
+			print_unsigned(number, 16, "0X", format, buffer);
+		else if (format.specifier == 'b')
+			print_unsigned(number, 2, "0B", format, buffer);
+	}
 	else if (format.specifier == 'x')
 		print_unsigned(number, 16, "0x", format, buffer);
-	else if (format.specifier == 'b' && format.flags & UPPERCASE)
-		print_unsigned(number, 2, "0B", format, buffer);
 	else if (format.specifier == 'b')
 		print_unsigned(number, 2, "0b", format, buffer);
 	return (SUCCESS);

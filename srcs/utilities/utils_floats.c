@@ -6,16 +6,17 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 10:00:21 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 14:12:27 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/10 21:04:20 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void print_fraction(long double fraction, uint8_t base, t_format format,
+void	print_fraction(long double fraction, uint8_t base, t_format format,
 						  t_buffer *buffer)
 {
-	if (fraction == 0)
+	buffered_print(".", 1, buffer);
+	if (fraction == 0.0)
 	{
 		while(format.precision--)
 			buffered_print("0", 1, buffer);
@@ -23,37 +24,44 @@ void print_fraction(long double fraction, uint8_t base, t_format format,
 	}
 	if (format.precision)
 	{
+		while (fraction < 0.1 && format.precision--)
+		{
+			buffered_print("0", 1, buffer);
+			fraction *= base;
+		}
 		while (format.precision--)
 			fraction *= base;
 		buffer_itoa_base(ft_round(fraction), base, format, buffer);
 	}
 }
 
-void print_exponent(int64_t exponent, uint8_t base, t_format format,
-						   t_buffer *buffer)
+#include <stdio.h>
+int32_t	is_denormalized(long double nb, t_format format, t_buffer *buffer)
 {
-	if (base == 16)
+	uint64_t	raw_value;
+	double		nbd;
+
+	nbd = (double)nb;
+	raw_value = *(uint64_t *)&nbd;
+	if (((raw_value >> 52) & 0xFFF) == 0xFFF)
 	{
-		if (format.flags & UPPERCASE)
-			buffered_print("P", 1, buffer);
+		if (raw_value & 0x000FFFFFFFFFFFFF)
+			buffered_print(
+				(format.flags & UPPERCASE) ? "-NAN" : "-nan", 4, buffer);
 		else
-			buffered_print("p", 1, buffer);
+			buffered_print(
+				(format.flags & UPPERCASE) ? "-INF" : "-inf", 4, buffer);
+		return (SUCCESS);
 	}
-	else
+	else if (((raw_value >> 52) & 0xFFF) == 0x7FF)
 	{
-		if (format.flags & UPPERCASE)
-			buffered_print("E", 1, buffer);
+		if (raw_value & 0x000FFFFFFFFFFFFF)
+			buffered_print(
+				(format.flags & UPPERCASE) ? "NAN" : "nan", 3, buffer);
 		else
-			buffered_print("e", 1, buffer);
+			buffered_print(
+				(format.flags & UPPERCASE) ? "INF" : "inf", 3, buffer);
+		return (SUCCESS);
 	}
-	if (exponent >= 0)
-		buffered_print("+", 1, buffer);
-	else
-		buffered_print("-", 1, buffer);
-	 if (((exponent < 9) && (exponent > -9)) && (base == 10))
-		buffered_print("0", 1, buffer);
-	if (exponent == 0)
-		buffered_print("0", 1, buffer);
-	else
-		buffer_itoa_base(ft_absl(exponent), 10, format, buffer);
+	return (FAILURE);
 }

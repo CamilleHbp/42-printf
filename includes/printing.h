@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 19:26:25 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/10 16:04:32 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	print_float_number(long double nb, uint8_t base, t_format format,
 			t_buffer *buffer);
 void	print_float_scientific(long double nb, uint8_t base, char *prefix,
 			t_format format, t_buffer *buffer);
+void	print_float_shorter(long double nb, t_format format, t_buffer *buffer);
 void	print_signed(intmax_t nb, t_format format, t_buffer *buffer);
 int32_t	print_percent(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_pointer(t_format format, va_list *app, t_buffer *buffer);
