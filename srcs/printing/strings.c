@@ -6,14 +6,14 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 18:34:20 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 13:48:05 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/15 14:13:28 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printing.h"
 
-static int32_t	print_null(int32_t precision, t_buffer *buffer)
+ static int32_t	print_null(int32_t precision, t_buffer *buffer)
 {
 	if (precision > 0)
 		buffered_print("(null)", 6, buffer);
@@ -27,17 +27,25 @@ static int32_t get_print_len(char *str, wchar_t *wstr, t_format format)
 
 	if (format.flags & LONG)
 	{
-		strlen = ft_wstrlen(wstr);
+		while (*wstr != L'\0')
+		{
+			strlen += ft_wcharlen(*wstr++);
+			// remove strlen to precision if precision is under 0 we add 1
+			if (format.flags & PRECISION && format.precision >= 0)
+			{
+				len += strlen;
+				format.precision -= strlen;
+			}
+		}
+		printf("strlen: %d\n", strlen);
 		len = (format.flags & PRECISION) ?
 				ft_min(format.precision, strlen) : strlen;
-		len = (len < strlen) ? strlen : len;
 	}
 	else
 	{
 		strlen = ft_strlen(str);
 		len = (format.flags & PRECISION) ?
 				ft_min(format.precision, strlen) : strlen;
-		len = (len < strlen) ? len : strlen;
 	}
 	return (len);
 }
@@ -67,28 +75,29 @@ int32_t	print_string(t_format format, va_list *app, t_buffer *buffer)
 {
 	char		*str;
 	wchar_t		*wstr;
-	intmax_t	len;
-	size_t		width;
 
 	str = "";
 	wstr = L"";
 	if (format.flags & LONG)
-	{
-		if ((wstr = va_arg(*app, wchar_t*)) == NULL)
-			return (print_null(format.precision, buffer));
-	}
+		wstr = va_arg(*app, wchar_t*);
 	else
-		if ((str = va_arg(*app, char*)) == NULL)
-			return (print_null(format.precision, buffer));
-	len = get_print_len(str, wstr, format);
-	width = (format.width - len > 0) ? format.width - len : 0;
+		str = va_arg(*app, char*);
+	if (wstr != NULL && str != NULL)
+		format.precision = get_print_len(str, wstr, format);
+	else if (format.precision > 0)
+		return(print_null(format.precision, buffer));
+	printf("precision: %d\n", format.precision);
+	format.width = (format.width - format.precision > 0) ?
+						format.width - format.precision : 0;
+	printf("width: %d\n", format.width);
+	printf("charlen: %d\n", ft_wcharlen(*wstr));
 	if (!(format.flags & RIGHT_PAD))
-		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
-	if (format.flags & LONG)
-		buffer_wstring(wstr, len, buffer);
-	else
-		buffered_print(str, len, buffer);
+		padd_value((format.flags & ZERO_PAD) ? "0" : " ", format.width, buffer);
+	if (format.flags & LONG && wstr != NULL)
+		buffer_wstring(wstr, format.precision, buffer);
+	else if (str != NULL)
+		buffered_print(str, format.precision, buffer);
 	if (format.flags & RIGHT_PAD)
-		padd_value(" ", width, buffer);
+		padd_value(" ", format.width, buffer);
 	return (SUCCESS);
 }

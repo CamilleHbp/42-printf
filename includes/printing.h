@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/10 16:04:32 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/15 13:22:46 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 void	buffered_print(void *data, size_t size, t_buffer *buffer);
 void	buffer_wchar(wchar_t wchar, t_buffer *buffer);
-void	buffer_wstring(wchar_t *wstr, size_t len, t_buffer *buffer);
+void	buffer_wstring(wchar_t *wstr, int64_t len, t_buffer *buffer);
 int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_base(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_bytes(t_format format, va_list *app, t_buffer *buffer);

@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 17:58:28 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/10 15:20:22 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/15 10:24:58 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "printing.h"
 
 # define SCIENTIFIC	(int32_t)0
+# define FLOAT		(int32_t)1
 
 void	buffer_itoa_base(uintmax_t nb, int8_t base, t_format format,
 			t_buffer *buffer);

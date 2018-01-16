@@ -1,3 +1,0 @@
-# 42-printf
-
-This is an educational project at 42 school. We need to recreate the printf function. Joy...

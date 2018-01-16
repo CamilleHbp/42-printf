@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:07:28 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/31 12:16:37 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/15 13:24:33 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,8 @@ void		buffer_wchar(wchar_t wchar, t_buffer *buffer)
 		buffered_print(&wchar, 1, buffer);
 }
 
-void	buffer_wstring(wchar_t *wstr, size_t len, t_buffer *buffer)
+void	buffer_wstring(wchar_t *wstr, int64_t len, t_buffer *buffer)
 {
-	while (len)
-	{
-		buffer_wchar(*wstr, buffer);
-		len -= ft_wcharlen(*wstr);
-		++wstr;
-	}
+	while ((len -= ft_wcharlen(*wstr)) >= 0)
+		buffer_wchar(*wstr++, buffer);
 }

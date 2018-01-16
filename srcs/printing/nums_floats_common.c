@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:54:03 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/10 18:07:28 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/15 10:12:27 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int32_t				print_floats(t_format format, va_list *app,
 	long double number;
 
 	number = return_float(format, app);
+	if (!(format.flags & PRECISION))
+		format.precision = 6;
 	if (format.specifier == 'f')
 		print_float_number(number, 10, format, buffer);
 	else if (format.specifier == 'e')
