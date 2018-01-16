@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/10 18:10:04 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 12:47:10 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static t_functions	g_functions[] =
 	{print_integer, 'd'},
 	{print_integer, 'i'},
 	{print_base, 'x'},
-	{print_base, 'X'},
 	{print_base, 'o'},
 	{print_base, 'u'},
 	{print_bytes, 'n'},
@@ -27,6 +26,7 @@ static t_functions	g_functions[] =
 	{print_pointer, 'p'},
 	{print_floats, 'f'},
 	{print_floats, 'e'},
+	{print_floats, 'a'},
 	{print_floats, 'g'},
 	{print_base, 'b'},
 	{NULL, FAILURE}
@@ -107,19 +107,3 @@ void	buffered_print(void *void_data, size_t size, t_buffer *buf)
 	buf->buffer_index += size;
 	buf->bytes_written += size;
 }
-
-/* static char	*undefined_behaviour(char *string, va_list *app, t_buffer
-*buffer)
-{
-	char	*formatting;
-
-	formatting = "-+ #.*0hijlLtz";
-	if (ft_strchr(formatting, *string) == NULL && !ft_isdigit(*string))
-	{
-		buffered_print("% ", 0, buffer);
-		va_arg(*app, int);
-		buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
-		return (string + 1);
-	}
-	return (string);
-}*/
