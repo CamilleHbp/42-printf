@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_test.h                                       :+:      :+:    :+:   */
+/*   abs_t_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/17 13:17:34 by cbaillat          #+#    #+#             */
-/*   Updated: 2017/12/17 20:32:52 by cbaillat         ###   ########.fr       */
+/*   Created: 2018/01/16 16:34:51 by cbaillat          #+#    #+#             */
+/*   Updated: 2018/01/16 16:36:18 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_TEST_H
-# define PRINT_TEST_H
+#include "utils.h"
 
-#include "ft_printf.h"
-
-void	print_test(t_format format);
-
-#endif
+t_unsigned	abs_t_unsigned(t_unsigned nb)
+{
+	nb.nb < 0 ? nb.nb = -nb.nb : 0;
+	return (nb);
+}

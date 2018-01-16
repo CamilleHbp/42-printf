@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:56:18 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 14:45:09 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:10:55 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*set_width(char *string, t_format *format)
 	return (string);
 }
 
-int32_t	seek_width(char **string, t_format *format, va_list *app)
+int32_t		seek_width(char **string, t_format *format, va_list *app)
 {
 	if (**string == '*')
 	{

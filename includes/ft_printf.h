@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:47:02 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 14:12:41 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:27:55 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,13 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdint.h>
-# include <stdlib.h>
-// DEBUG:
-#include <stdio.h>
-
 # include "libft.h"
 
 # define SUCCESS				(int32_t)0
 # define FAILURE				(int32_t)-1
 # define UNDEFINED_BEHAVIOUR	(int8_t)-1
-# define MALLOC_FAIL			(int32_t)-2
-
-# define ITOA		(uint8_t)33
-# define X64_SIZE	(size_t)64
+# define ITOA					(uint8_t)33
+# define X64_SIZE				(size_t)64
 
 typedef struct	s_format
 {
@@ -53,6 +47,20 @@ typedef struct	s_functions
 	char		specifier;
 }				t_functions;
 
-int	ft_printf(const char *format, ...);
+typedef struct	s_unsigned
+{
+	uintmax_t	nb;
+	uint8_t		base;
+	char		*prefix;
+}				t_unsigned;
+
+typedef struct	s_double
+{
+	long double	nb;
+	uint8_t		base;
+	char		*prefix;
+}				t_double;
+
+int				ft_printf(const char *format, ...);
 
 #endif

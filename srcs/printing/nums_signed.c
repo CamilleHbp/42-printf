@@ -6,13 +6,14 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:01:45 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 20:28:18 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:49:46 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printing.h"
 
-static void	print_signed_prefix(intmax_t nb, t_format format, char nb_str[ITOA])
+static void		print_signed_prefix(intmax_t nb, t_format format,
+					char nb_str[ITOA])
 {
 	if (nb < 0)
 		nb_str[0] = '-';
@@ -22,8 +23,12 @@ static void	print_signed_prefix(intmax_t nb, t_format format, char nb_str[ITOA])
 		nb_str[0] = ' ';
 }
 
-	// If we have a 0 number and a precision of 0, we need to add 1 as we won't display the number
-static int32_t signed_width(intmax_t nb, t_format format)
+/*
+** If we have a 0 number and a precision of 0, we need to add 1 as we won't
+** display the number
+*/
+
+static int32_t	signed_width(intmax_t nb, t_format format)
 {
 	int32_t		to_print;
 	uintmax_t	tmp;
@@ -49,9 +54,10 @@ static int32_t signed_width(intmax_t nb, t_format format)
 **	We print the necessary 0 padding
 */
 
-void	print_signed(intmax_t nb, t_format format, t_buffer *buffer)
+void			print_signed(intmax_t nb, t_format format, t_buffer *buffer)
 {
-	char	nb_str[ITOA];
+	char		nb_str[ITOA];
+	t_unsigned	nb_unsigned;
 
 	if (format.flags & PRECISION)
 		format.flags &= ~ZERO_PAD;
@@ -63,7 +69,9 @@ void	print_signed(intmax_t nb, t_format format, t_buffer *buffer)
 	format.to_print = signed_width(nb, format);
 	if (!(format.flags & RIGHT_PAD) && !(format.flags & ZERO_PAD))
 		padd_value(" ", format.width - format.to_print, buffer);
-	print_itoa_base(ft_absl(nb), 10, format, nb_str);
+	nb_unsigned.nb = ft_absl(nb);
+	nb_unsigned.base = 10;
+	print_itoa_base(nb_unsigned, format, nb_str);
 	print_signed_prefix(nb, format, nb_str);
 	buffered_print(nb_str, format.to_print, buffer);
 	if (format.flags & RIGHT_PAD)
@@ -93,7 +101,7 @@ static intmax_t	return_integer(t_format format, va_list *app)
 	return (cast);
 }
 
-int32_t	print_integer(t_format format, va_list *app, t_buffer *buffer)
+int32_t			print_integer(t_format format, va_list *app, t_buffer *buffer)
 {
 	intmax_t number;
 

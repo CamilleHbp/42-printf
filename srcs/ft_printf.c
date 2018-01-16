@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 09:46:29 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 15:10:31 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:09:00 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ int			ft_printf(const char *format, ...)
 	}
 	write(1, buffer.buffer, buffer.buffer_index);
 	va_end(ap);
-	// if (buffer.undefined_behaviour == UNDEFINED_BEHAVIOUR)
-		// return (UNDEFINED_BEHAVIOUR);
 	return (buffer.bytes_written);
 }

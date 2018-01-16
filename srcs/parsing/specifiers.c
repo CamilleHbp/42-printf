@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:06 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 14:50:09 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:39:12 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ static void	set_upper_flag(char *c, t_format *format)
 	}
 	else if (ft_strchr("ABFEGX", *c) != NULL)
 	{
-		format->flags |= UPPERCASE;
+		format->flags |= UPPER;
 		format->specifier = *c + 32;
 	}
 	else
 		format->specifier = *c;
 }
 
-void	get_specifier(char **string, t_format *format)
+void		get_specifier(char **string, t_format *format)
 {
 	if (!**string)
 		return ;

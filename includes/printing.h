@@ -6,12 +6,12 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:01 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/15 13:22:46 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:28:03 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARG_PRINT_H
-# define ARG_PRINT_H
+#ifndef PRINTING_H
+# define PRINTING_H
 
 # include "ft_printf.h"
 # include "parsing.h"
@@ -27,8 +27,6 @@
 # define X_PREFIX		"0x"
 # define XUP_PREFIX		"0X"
 
-
-
 void	buffered_print(void *data, size_t size, t_buffer *buffer);
 void	buffer_wchar(wchar_t wchar, t_buffer *buffer);
 void	buffer_wstring(wchar_t *wstr, int64_t len, t_buffer *buffer);
@@ -38,16 +36,13 @@ int32_t	print_bytes(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_char(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_integer(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_floats(t_format format, va_list *app, t_buffer *buffer);
-void	print_float_number(long double nb, uint8_t base, t_format format,
-			t_buffer *buffer);
-void	print_float_scientific(long double nb, uint8_t base, char *prefix,
-			t_format format, t_buffer *buffer);
-void	print_float_shorter(long double nb, t_format format, t_buffer *buffer);
+void	print_float_number(t_double nb, t_format format, t_buffer *buffer);
+void	print_float_scientific(t_double nb, t_format format, t_buffer *buffer);
+void	print_float_shorter(t_double nb, t_format format, t_buffer *buffer);
 void	print_signed(intmax_t nb, t_format format, t_buffer *buffer);
 int32_t	print_percent(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_pointer(t_format format, va_list *app, t_buffer *buffer);
 int32_t	print_string(t_format format, va_list *app, t_buffer *buffer);
-void	print_unsigned(uintmax_t nb, uint8_t base, char *prefix, t_format format,
-			t_buffer *buffer);
+void	print_unsigned(t_unsigned nb, t_format format, t_buffer *buffer);
 
 #endif

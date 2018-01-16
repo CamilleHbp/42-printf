@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 23:37:13 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 12:09:11 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:39:12 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SPACE		(1 << 3)
 # define ZERO_PAD	(1 << 4)
 
-# define UPPERCASE	(1 << 5)
+# define UPPER	(1 << 5)
 
 # define SHORT		(1 << 7)
 # define SSHORT		(1 << 8)

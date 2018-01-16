@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 11:54:03 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/15 10:12:27 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:17:51 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static long double	return_float(t_format format, va_list *app)
 {
-	long double	cast;
+	long double cast;
 
 	if (format.flags & LDOUBLE)
 		cast = (long double)va_arg(*app, long double);
@@ -26,20 +26,29 @@ static long double	return_float(t_format format, va_list *app)
 int32_t				print_floats(t_format format, va_list *app,
 						t_buffer *buffer)
 {
-	long double number;
+	t_double number;
 
-	number = return_float(format, app);
+	number.nb = return_float(format, app);
 	if (!(format.flags & PRECISION))
 		format.precision = 6;
-	if (format.specifier == 'f')
-		print_float_number(number, 10, format, buffer);
-	else if (format.specifier == 'e')
-		print_float_scientific(number, 10, "", format, buffer);
-	else if (format.specifier == 'g')
-		print_float_shorter(number, format, buffer);
-	else if (format.specifier == 'a' && format.flags & UPPERCASE)
-		print_float_scientific(number, 16, "0X", format, buffer);
+	if (ft_strchr("fge", format.specifier) != NULL)
+	{
+		number.base = 10;
+		number.prefix = "";
+		if (format.specifier == 'f')
+			print_float_number(number, format, buffer);
+		else if (format.specifier == 'e')
+			print_float_scientific(number, format, buffer);
+		else if (format.specifier == 'g')
+			print_float_shorter(number, format, buffer);
+	}
 	else if (format.specifier == 'a')
-		print_float_scientific(number, 16, "0x", format, buffer);
+	{
+		number.base = 16;
+		number.prefix = "0x";
+		if (format.specifier == 'a' && format.flags & UPPER)
+			number.prefix = "0X";
+		print_float_scientific(number, format, buffer);
+	}
 	return (SUCCESS);
 }

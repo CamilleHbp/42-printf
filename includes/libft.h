@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:33:34 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/09 13:35:39 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:04:40 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef	uint8_t	t_bool;
-typedef uint8_t	t_byte;
+typedef	uint8_t		t_bool;
+typedef uint8_t		t_byte;
 
 typedef struct		s_list
 {

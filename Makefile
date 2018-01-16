@@ -1,26 +1,25 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile-main                                      :+:      :+:    :+:    #
+#    Makefile.bak                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:12:06 by cbaillat          #+#    #+#              #
-#    Updated: 2018/01/15 11:32:04 by cbaillat         ###   ########.fr        #
+#    Updated: 2018/01/15 11:32:01 by cbaillat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf
+NAME = libftprintf.a
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 # sources
 # we use the VPATH variable which causes MAKE to look for sources in all those
 # directories
 VPATH	:= ./:./srcs:./srcs/parsing:./srcs/printing:./srcs/utilities
 SRCS	:=	ft_printf.c
-SRCS	+=	main-bak.c
 SRCS	+=	flags.c \
 			parsing.c \
 			length.c \
@@ -151,7 +150,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@echo "[Building ${PURPLE}library${NC}]"
-	@$(CC) $(CFLAGS) $(OBJECTS) $(IFLAGS) -o $(NAME)
+	@ar rcs $(NAME) $(OBJECTS)
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)

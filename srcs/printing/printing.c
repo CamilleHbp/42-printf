@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 22:28:32 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/16 12:47:10 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:31:41 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static t_functions	g_functions[] =
 	{NULL, FAILURE}
 };
 
-static int	print_function(t_format format, va_list *app,
-				t_buffer *buffer)
+static int		print_function(t_format format, va_list *app,
+					t_buffer *buffer)
 {
 	int32_t	i;
 
@@ -54,7 +54,7 @@ static int32_t	undefined_behaviour(t_format format, t_buffer *buffer)
 
 	if (!format.specifier)
 		return (FAILURE);
-	width = (format.width > 0) ? format.width - 1: 0;
+	width = (format.width > 0) ? format.width - 1 : 0;
 	if (!(format.flags & RIGHT_PAD))
 		padd_value((format.flags & ZERO_PAD) ? "0" : " ", width, buffer);
 	undefined_char[1] = '\0';
@@ -62,11 +62,10 @@ static int32_t	undefined_behaviour(t_format format, t_buffer *buffer)
 	buffered_print(undefined_char, ft_strlen(undefined_char), buffer);
 	if (format.flags & RIGHT_PAD)
 		padd_value(" ", width, buffer);
-	// buffer->undefined_behaviour = UNDEFINED_BEHAVIOUR;
 	return (FAILURE);
 }
 
-int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer)
+int32_t			print_arg(t_format format, va_list *app, t_buffer *buffer)
 {
 	if (print_function(format, app, buffer) == FAILURE)
 		return (undefined_behaviour(format, buffer));
@@ -84,7 +83,7 @@ int32_t	print_arg(t_format format, va_list *app, t_buffer *buffer)
 ** 2- As long as the buffer has space, we store it in.
 */
 
-void	buffered_print(void *void_data, size_t size, t_buffer *buf)
+void			buffered_print(void *void_data, size_t size, t_buffer *buf)
 {
 	uint32_t	leftover;
 	uint8_t		*data;

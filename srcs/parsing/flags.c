@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 21:17:33 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/08 14:53:40 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 14:10:33 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** #		oxX:
 **		value is preceeded with 0, 0x or 0X for values different than zero.
 **			aAeEfFgG:
-**		it forces the output to contain a decimal point even if no digits follow.
+**		it forces the output to contain a decimal point even if no digits follow
 **		By default, if no digits follow, no decimal point is written.
 ** 0	Left-pads the number with zeroes (0) instead when padding is specified
 **		If a - flag and 0 flag appears, the - flag overrides the 0.
