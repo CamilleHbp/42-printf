@@ -6,7 +6,7 @@
 /*   By: cbaillat <cbaillat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/19 17:58:28 by cbaillat          #+#    #+#             */
-/*   Updated: 2018/01/16 16:48:39 by cbaillat         ###   ########.fr       */
+/*   Updated: 2018/01/16 17:41:37 by cbaillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define SCIENTIFIC	(int32_t)0
 # define FLOAT		(int32_t)1
 
-t_unsigned	abs_t_unsigned(t_unsigned nb);
 void		buffer_itoa_base(t_unsigned nb, t_format format, t_buffer *buffer);
 size_t		get_nb_len(uintmax_t nb, uint8_t base);
 int32_t		is_denormalized(long double nb, t_format format, t_buffer *buffer);
